@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Exam-ready R guide for Q49, Q47, Q50, and Q51 in JupyterLab and RStudio.">
+  <title>R Exam Study Hub | Q49, Q47, Q50, Q51</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap">
+  </noscript>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-jupyter-light">
+  <!-- Top Reading Progress Indicator -->
+  <div id="scrollProgressBar" class="progress-bar-top"></div>
+
+  <!-- 1. Top Menu Bar (JupyterLab Menu Bar) -->
+  <header class="jp-menubar">
+    <div class="jp-menubar-left">
+      <div class="jp-logo" title="JupyterLab">
+        <svg viewBox="0 0 44 50" width="16" height="18" fill="none">
+          <circle cx="22" cy="9" r="5" fill="#757575"/>
+          <circle cx="22" cy="41" r="5" fill="#757575"/>
+          <circle cx="39" cy="25" r="4" fill="#757575"/>
+          <circle cx="22" cy="25" r="14" stroke="#F37626" stroke-width="4.5" stroke-dasharray="35 55"/>
+        </svg>
+      </div>
+      <div class="jp-menu-list">
+        <span class="jp-menu-item">File</span>
+        <span class="jp-menu-item">Edit</span>
+        <span class="jp-menu-item">View</span>
+        <span class="jp-menu-item">Run</span>
+        <span class="jp-menu-item">Kernel</span>
+        <span class="jp-menu-item">Tabs</span>
+        <span class="jp-menu-item">Settings</span>
+        <span class="jp-menu-item">Help</span>
+      </div>
+    </div>
+    <div class="jp-menubar-right">
+      <span class="jp-kernel-badge" title="R (r_env) Kernel Active"><span class="jp-kernel-dot"></span> R (r_env)</span>
+      <button id="themeToggleBtn" class="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle JupyterLab Theme">
+        <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button id="mobileNavToggle" class="mobile-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. Notebook Tab Bar (JupyterLab Tabs) -->
+  <div class="jp-tabstrip-wrapper">
+    <nav class="question-switcher" aria-label="Select JupyterLab Notebook">
+      <button type="button" class="q-tab active" data-target="q49" id="tab-q49" title="Twitter Sentiment Analysis">
+        <span class="jp-tab-icon">📙</span>
+        <span class="q-tab-name">Untitled3.ipynb</span>
+        <span class="jp-tab-badge">Q49</span>
+        <span class="jp-tab-close" title="Close">✕</span>
+      </button>
+      <button type="button" class="q-tab" data-target="q47" id="tab-q47" title="CO2 Time Series Forecasting">
+        <span class="jp-tab-icon">📙</span>
+        <span class="q-tab-name">Time_Series.ipynb</span>
+        <span class="jp-tab-badge">Q47</span>
+        <span class="jp-tab-close" title="Close">✕</span>
+      </button>
+      <button type="button" class="q-tab" data-target="q50" id="tab-q50" title="Student Analytics Shiny Dashboard">
+        <span class="jp-tab-icon">📙</span>
+        <span class="q-tab-name">Student_Shiny.ipynb</span>
+        <span class="jp-tab-badge">Q50</span>
+        <span class="jp-tab-close" title="Close">✕</span>
+      </button>
+      <button type="button" class="q-tab" data-target="q51" id="tab-q51" title="Car Analytics Shiny Dashboard">
+        <span class="jp-tab-icon">📙</span>
+        <span class="q-tab-name">Car_Shiny.ipynb</span>
+        <span class="jp-tab-badge">Q51</span>
+        <span class="jp-tab-close" title="Close">✕</span>
+      </button>
+      <span class="jp-new-tab-btn" title="Notebooks (4 active)">+</span>
+    </nav>
+  </div>
+
+  <!-- 3. Notebook Toolbar (JupyterLab Cell Actions & Fast Commands) -->
+  <div class="jp-toolbar">
+    <div class="jp-toolbar-left">
+      <button class="jp-tool-btn" title="Save Notebook (Ctrl+S)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+      </button>
+      <button class="jp-tool-btn" title="Insert Cell Below">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      </button>
+      <button class="jp-tool-btn" title="Cut Selected Cell">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+      </button>
+      <button class="jp-tool-btn" title="Copy Selected Cell">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+      <button class="jp-tool-btn" title="Paste Cells Below">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+      </button>
+      <span class="jp-tool-sep"></span>
+      <button class="jp-tool-btn jp-run-cell-btn" title="Run Selected Cell and Advance (Shift+Enter)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
+      <button class="jp-tool-btn" title="Interrupt Kernel">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="5" width="14" height="14" rx="1"></rect></svg>
+      </button>
+      <button class="jp-tool-btn" title="Restart Kernel">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+      </button>
+      <button class="jp-tool-btn" title="Restart and Run All Cells">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
+      </button>
+      <span class="jp-tool-sep"></span>
+      <div class="jp-cell-type-dropdown">
+        <span>Code</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+    </div>
+
+    <div class="jp-toolbar-right">
+      <!-- Live Search Box in JupyterLab Style -->
+      <div class="search-box">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Filter parts, code..." aria-label="Search guide content">
+        <span class="search-shortcut">/</span>
+      </div>
+
+      <!-- Copy All Code of Active Question Only -->
+      <button id="copyAllScriptBtn" class="btn btn-primary" title="Copy all R code for this question only to clipboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span id="copyAllBtnText">Copy All (Q49)</span>
+      </button>
+
+      <!-- Export .R Script -->
+      <button id="exportScriptBtn" class="btn btn-outline" title="Download current question code as a ready-to-run .R file">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>Download .R</span>
+      </button>
+
+      <!-- Active Kernel Indicator -->
+      <div class="jp-kernel-status" title="Active Jupyter Kernel: R">
+        <span class="jp-kernel-circle">○</span>
+        <span class="jp-kernel-text">R (r_env)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="layout-wrapper">
+    <!-- JupyterLab Activity Bar (Left icon strip) -->
+    <aside class="jp-activity-bar" aria-label="JupyterLab Activity Bar">
+      <button class="jp-act-btn active" title="File Browser">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+      </button>
+      <button class="jp-act-btn" title="Running Terminals and Kernels">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </button>
+      <button class="jp-act-btn" title="Table of Contents">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+      </button>
+      <button class="jp-act-btn" title="Extension Manager">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
+      </button>
+      <div class="jp-act-bottom">
+        <button class="jp-act-btn" title="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Sidebar Navigation (JupyterLab File Browser) -->
+    <aside class="guide-sidebar" id="guideSidebar">
+      <div class="jp-fb-toolbar">
+        <button class="jp-fb-btn jp-fb-new" title="New Notebook / File">+</button>
+        <button class="jp-fb-btn" title="New Folder">📁</button>
+        <button class="jp-fb-btn" title="Upload Files">⬆</button>
+        <button class="jp-fb-btn" title="Refresh File List">↻</button>
+      </div>
+      <div class="jp-fb-breadcrumb">
+        <span>/</span> <span>Notebooks</span> <span>/</span> <strong id="jpActiveFileName">Untitled3.ipynb</strong>
+      </div>
+      <div class="sidebar-header">
+        <span class="toc-title" id="sidebarTocTitle">Name</span>
+        <span class="progress-pill" id="progressSummary">Modified</span>
+      </div>
+
+      <!-- Q49 Sidebar Navigation -->
+      <nav class="sidebar-nav q-nav" id="sidebarNav-q49">
+        <div class="nav-group">
+          <div class="nav-group-title">Setup &amp; Data</div>
+          <a href="#q49-overview" class="nav-link"><span>00</span> Overview</a>
+          <a href="#q49-part-1" class="nav-link"><span>01</span> Install Packages</a>
+          <a href="#q49-part-2" class="nav-link"><span>02</span> Load Packages</a>
+          <a href="#q49-part-3" class="nav-link"><span>03</span> Load Tweets.csv</a>
+          <a href="#q49-part-4" class="nav-link"><span>04</span> Select Columns</a>
+          <a href="#q49-part-5" class="nav-link"><span>05</span> Check Dataset</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Cleaning &amp; Tokens</div>
+          <a href="#q49-part-6" class="nav-link"><span>06</span> Clean Tweets</a>
+          <a href="#q49-part-7" class="nav-link"><span>07</span> Tokenization</a>
+          <a href="#q49-part-8" class="nav-link"><span>08</span> Remove Stopwords</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Frequency &amp; N-Grams</div>
+          <a href="#q49-part-9" class="nav-link"><span>09</span> Word Frequency</a>
+          <a href="#q49-part-10" class="nav-link"><span>10</span> Word Freq Graph</a>
+          <a href="#q49-part-11" class="nav-link"><span>11</span> Word Cloud</a>
+          <a href="#q49-part-12" class="nav-link"><span>12</span> Bigrams</a>
+          <a href="#q49-part-13" class="nav-link"><span>13</span> Bigram Graph</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Matrix Representations</div>
+          <a href="#q49-part-14" class="nav-link"><span>14</span> Bag of Words</a>
+          <a href="#q49-part-15" class="nav-link"><span>15</span> TF-IDF</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Bing Sentiment Analysis</div>
+          <a href="#q49-part-16" class="nav-link"><span>16</span> Bing Sentiment</a>
+          <a href="#q49-part-17" class="nav-link"><span>17</span> Bing Sentiment Count</a>
+          <a href="#q49-part-18" class="nav-link"><span>18</span> Bing Sentiment Graph</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Terms &amp; Comparison</div>
+          <a href="#q49-part-19" class="nav-link"><span>19</span> Positive Terms</a>
+          <a href="#q49-part-20" class="nav-link"><span>20</span> Negative Terms</a>
+          <a href="#q49-part-21" class="nav-link"><span>21</span> Compare Airlines</a>
+          <a href="#q49-part-22" class="nav-link"><span>22</span> Conclusion</a>
+          <a href="#q49-checklist" class="nav-link"><span>✓</span> 22-Part Checklist</a>
+        </div>
+      </nav>
+
+      <!-- Q47 Sidebar Navigation -->
+      <nav class="sidebar-nav q-nav" id="sidebarNav-q47" style="display: none;">
+        <div class="nav-group">
+          <div class="nav-group-title">Setup &amp; Exploration</div>
+          <a href="#q47-overview" class="nav-link"><span>00</span> Overview</a>
+          <a href="#q47-part-1" class="nav-link"><span>01</span> Install Packages</a>
+          <a href="#q47-part-2" class="nav-link"><span>02</span> Load Packages</a>
+          <a href="#q47-part-3" class="nav-link"><span>03</span> Load CO2 Data</a>
+          <a href="#q47-part-4" class="nav-link"><span>04</span> Check Dataset</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Visuals &amp; Decomposition</div>
+          <a href="#q47-part-5" class="nav-link"><span>05</span> Visualize Series</a>
+          <a href="#q47-part-6" class="nav-link"><span>06</span> Trend &amp; Seasonality</a>
+          <a href="#q47-part-7" class="nav-link"><span>07</span> Decomposition</a>
+          <a href="#q47-part-8" class="nav-link"><span>08</span> Train / Test Split</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Forecasting Models</div>
+          <a href="#q47-part-9" class="nav-link"><span>09</span> Seasonal Naive</a>
+          <a href="#q47-part-10" class="nav-link"><span>10</span> Holt Exponential</a>
+          <a href="#q47-part-11" class="nav-link"><span>11</span> ARIMA Model</a>
+          <a href="#q47-part-12" class="nav-link"><span>12</span> Test Forecasts</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Evaluation &amp; Selection</div>
+          <a href="#q47-part-13" class="nav-link"><span>13</span> Compare Actual/Test</a>
+          <a href="#q47-part-14" class="nav-link"><span>14</span> MAE, RMSE, MAPE</a>
+          <a href="#q47-part-15" class="nav-link"><span>15</span> Compare 3 Models</a>
+          <a href="#q47-part-16" class="nav-link"><span>16</span> Select Best Model</a>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-group-title">Forecast &amp; Interpretation</div>
+          <a href="#q47-part-17" class="nav-link"><span>17</span> 12-Month Forecast</a>
+          <a href="#q47-part-18" class="nav-link"><span>18</span> Forecast Graph</a>
+          <a href="#q47-part-19" class="nav-link"><span>19</span> Business Interpretation</a>
+          <a href="#q47-checklist" class="nav-link"><span>✓</span> 19-Part Checklist</a>
+        </div>
+      </nav>
+
+      <!-- Q50 Sidebar Navigation -->
+      <nav class="sidebar-nav q-nav" id="sidebarNav-q50" style="display: none;">
+        <div class="nav-group">
+          <div class="nav-group-title">Dashboard Setup</div>
+          <a href="#q50-overview" class="nav-link"><span>00</span> Architecture Flow</a>
+          <a href="#q50-part-1" class="nav-link"><span>01</span> Install Packages</a>
+          <a href="#q50-part-2" class="nav-link"><span>02</span> Load Packages</a>
+          <a href="#q50-part-3" class="nav-link"><span>03</span> Create Dataset</a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Shiny Structure</div>
+          <a href="#q50-part-4" class="nav-link"><span>04</span> Create UI</a>
+          <a href="#q50-part-5" class="nav-link"><span>05</span> Create Server</a>
+          <a href="#q50-part-6" class="nav-link"><span>06</span> Run Dashboard</a>
+          <a href="#q50-summary" class="nav-link"><span>★</span> Parts Mapping</a>
+          <a href="#q50-checklist" class="nav-link"><span>✓</span> Q50 Checklist</a>
+        </div>
+      </nav>
+
+      <!-- Q51 Sidebar Navigation -->
+      <nav class="sidebar-nav q-nav" id="sidebarNav-q51" style="display: none;">
+        <div class="nav-group">
+          <div class="nav-group-title">Dashboard Setup</div>
+          <a href="#q51-overview" class="nav-link"><span>00</span> Architecture Flow</a>
+          <a href="#q51-part-1" class="nav-link"><span>01</span> Install Packages</a>
+          <a href="#q51-part-2" class="nav-link"><span>02</span> Load Packages</a>
+          <a href="#q51-part-3" class="nav-link"><span>03</span> Load mtcars Data</a>
+        </div>
+        <div class="nav-group">
+          <div class="nav-group-title">Shiny Structure</div>
+          <a href="#q51-part-4" class="nav-link"><span>04</span> Create UI</a>
+          <a href="#q51-part-5" class="nav-link"><span>05</span> Create Server</a>
+          <a href="#q51-part-6" class="nav-link"><span>06</span> Run Dashboard</a>
+          <a href="#q51-summary" class="nav-link"><span>★</span> Shiny Pattern</a>
+          <a href="#q51-checklist" class="nav-link"><span>✓</span> Q51 Checklist</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="guide-main" id="mainContent">
+
+      <!-- ================================================================= -->
+      <!-- VIEW: Q49 (TWITTER AIRLINE SENTIMENT) -->
+      <!-- ================================================================= -->
+      <div id="view-q49" class="question-view active">
+        <section id="q49-overview" class="guide-card hero-card">
+          <div class="hero-header">
+            <div class="hero-tag">Complete JupyterLab R Notebook</div>
+            <h2>Q49 — Simple Text Mining + Bing Sentiment Analysis</h2>
+            <p class="hero-desc">
+              Complete, streamlined R code from the beginning. Loads local <strong><code>Tweets.csv</code></strong>, cleans text, performs tokenization, stopword removal, frequency analysis, word cloud, bigrams, Bag of Words, TF-IDF, and <strong>Bing Sentiment Analysis</strong> without any unnecessary advanced code.
+            </p>
+          </div>
+
+          <div class="dataset-meta-grid">
+            <div class="meta-box"><span class="meta-label">Dataset File</span><span class="meta-val">Local <code>Tweets.csv</code></span></div>
+            <div class="meta-box"><span class="meta-label">Sentiment Lexicon</span><span class="meta-val">Bing (Polarity: <code>sentiment.y</code>)</span></div>
+            <div class="meta-box"><span class="meta-label">Offline Ready</span><span class="meta-val">Yes (after package install)</span></div>
+            <div class="meta-box"><span class="meta-label">Total Steps</span><span class="meta-val">22 Clean Sequential Parts</span></div>
+          </div>
+
+          <div class="interactive-sandbox-bar">
+            <div class="sandbox-title">⚡ Simplified &amp; Exam-Friendly</div>
+            <p>No AFINN, no NRC, no complex emotion modeling, no internet dependency during dataset analysis. Direct, reliable, and tested for JupyterLab.</p>
+          </div>
+
+          <div class="overview-actions">
+            <button class="btn btn-primary q-copy-all-btn" data-question="q49" title="Copy all 22 parts of Q49 code only">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy All Q49 Code (22 Parts)</span>
+            </button>
+            <button class="btn btn-outline q-download-btn" data-question="q49" title="Download Q49 code as .R script file">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Q49 Script (.R)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Q49 Parts 1 to 22 -->
+        <section id="q49-part-1" class="guide-card part-card" data-part="1">
+          <div class="card-header"><div class="part-pill">Part 1</div><h3 class="part-heading">Install Required Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Install the required R packages</div>
+          <p class="part-intro">Run this <strong>only once</strong> in JupyterLab. Requires internet connection the first time.</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script (Run Once)</span><button class="copy-btn" data-clipboard="p1-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p1-code">install.packages("tidyverse")
+install.packages("tidytext")
+install.packages("wordcloud")
+install.packages("RColorBrewer")</code></pre>
+          </div>
+          <div class="explanation-box"><h4>💡 Note</h4><p>Wait until all package installations finish in JupyterLab before moving to Part 2.</p></div>
+        </section>
+
+        <section id="q49-part-2" class="guide-card part-card" data-part="2">
+          <div class="card-header"><div class="part-pill">Part 2</div><h3 class="part-heading">Load Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load the required packages</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p2-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p2-code">library(tidyverse)
+library(tidytext)
+library(wordcloud)
+library(RColorBrewer)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-3" class="guide-card part-card" data-part="3">
+          <div class="card-header"><div class="part-pill">Part 3</div><h3 class="part-heading">Load the Dataset</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load the Twitter dataset</div>
+          <p class="part-intro">Put <strong><code>Tweets.csv</code> in the same folder as your Jupyter notebook</strong>.</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p3-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p3-code">tweets <- read.csv(
+  "Tweets.csv",
+  stringsAsFactors = FALSE
+)
+
+head(tweets)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-4" class="guide-card part-card" data-part="4">
+          <div class="card-header"><div class="part-pill">Part 4</div><h3 class="part-heading">Select Required Columns</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Select tweet, sentiment and airline</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p4-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p4-code">df <- tweets %>%
+  select(
+    text,
+    sentiment = airline_sentiment,
+    airline
+  )
+
+head(df)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-5" class="guide-card part-card" data-part="5">
+          <div class="card-header"><div class="part-pill">Part 5</div><h3 class="part-heading">Check the Dataset</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Explore the dataset</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p5-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p5-code">dim(df)
+
+table(df$sentiment)
+
+table(df$airline)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-6" class="guide-card part-card" data-part="6">
+          <div class="card-header"><div class="part-pill">Part 6</div><h3 class="part-heading">Clean the Tweets</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Clean and preprocess the tweets</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p6-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p6-code">df$clean_text <- df$text %>%
+  str_to_lower() %>%
+  str_replace_all("http\\S+|www\\.\\S+", " ") %>%
+  str_replace_all("@\\w+", " ") %>%
+  str_replace_all("[[:punct:]]", " ") %>%
+  str_replace_all("[0-9]+", " ") %>%
+  str_squish()
+
+head(df[, c("text", "clean_text")])</code></pre>
+          </div>
+          <!-- Authentic JupyterLab R DataFrame Output (matching screenshot) -->
+          <div class="jp-dataframe">
+            <div class="jp-df-meta">A data.frame: 6 × 2</div>
+            <table class="jp-dataframe-table">
+              <thead>
+                <tr>
+                  <th class="row-num"></th>
+                  <th>text <span class="col-type">&lt;chr&gt;</span></th>
+                  <th>clean_text <span class="col-type">&lt;chr&gt;</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="row-num">1</td>
+                  <td>@VirginAmerica What @dhepburn said.</td>
+                  <td>what said</td>
+                </tr>
+                <tr>
+                  <td class="row-num">2</td>
+                  <td>@VirginAmerica plus you've added commercials to the experience... tacky.</td>
+                  <td>plus you ve added commercials to the experience tacky</td>
+                </tr>
+                <tr>
+                  <td class="row-num">3</td>
+                  <td>@VirginAmerica I didn't today... Must mean I need to take another trip!</td>
+                  <td>i didn t today must mean i need to take another trip</td>
+                </tr>
+                <tr>
+                  <td class="row-num">4</td>
+                  <td>@VirginAmerica it's really aggressive to blast obnoxious &quot;entertainment&quot; in your guests' faces &amp;amp; they have little recourse</td>
+                  <td>it s really aggressive to blast obnoxious entertainment in your guests faces amp they have little recourse</td>
+                </tr>
+                <tr>
+                  <td class="row-num">5</td>
+                  <td>@VirginAmerica and it's a really big bad thing about it</td>
+                  <td>and it s a really big bad thing about it</td>
+                </tr>
+                <tr>
+                  <td class="row-num">6</td>
+                  <td>@VirginAmerica seriously would pay $30 a flight for seats that didn't have this playing. it's really the only bad thing about flying VA</td>
+                  <td>seriously would pay $ a flight for seats that didn t have this playing it s really the only bad thing about flying va</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="widget-box">
+            <div class="widget-header"><span class="widget-badge">LIVE DEMO</span><strong>Try the Regex Cleaner</strong></div>
+            <div class="interactive-cleaner">
+              <div class="input-group">
+                <label for="cleanerInput">Raw Tweet:</label>
+                <input type="text" id="cleanerInput" value="@VirginAmerica Great flight 104 today!! Check https://va.com :)" />
+              </div>
+              <div class="cleaner-output-arrow">&darr; Cleaned Result &darr;</div>
+              <div class="output-group"><span class="output-label">clean_text:</span><div id="cleanerOutput" class="cleaner-result"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="q49-part-7" class="guide-card part-card" data-part="7">
+          <div class="card-header"><div class="part-pill">Part 7</div><h3 class="part-heading">Tokenization</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Split tweets into individual words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p7-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p7-code">tokens <- df %>%
+  select(airline, sentiment, clean_text) %>%
+  unnest_tokens(word, clean_text)
+
+head(tokens)</code></pre>
+          </div>
+          <div class="widget-box">
+            <div class="widget-header"><span class="widget-badge">INTERACTIVE</span><strong>Tokenize Text Generator</strong></div>
+            <div class="input-group"><input type="text" id="tokenizerInput" value="good flight today and great crew" /></div>
+            <div id="tokenChips" class="chip-container"></div>
+          </div>
+        </section>
+
+        <section id="q49-part-8" class="guide-card part-card" data-part="8">
+          <div class="card-header"><div class="part-pill">Part 8</div><h3 class="part-heading">Remove Stopwords</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Remove common words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p8-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p8-code">tokens_clean <- tokens %>%
+  anti_join(stop_words, by = "word")
+
+head(tokens_clean)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-9" class="guide-card part-card" data-part="9">
+          <div class="card-header"><div class="part-pill">Part 9</div><h3 class="part-heading">Word Frequency</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Find the most common words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p9-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p9-code">word_frequency <- tokens_clean %>%
+  count(word, sort = TRUE)
+
+head(word_frequency, 10)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-10" class="guide-card part-card" data-part="10">
+          <div class="card-header"><div class="part-pill">Part 10</div><h3 class="part-heading">Word Frequency Graph</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Visualize the most common words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p10-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p10-code">top_words <- word_frequency %>%
+  slice_max(n, n = 10)
+
+ggplot(top_words, aes(x = reorder(word, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Top 10 Most Frequent Words",
+    x = "Word",
+    y = "Frequency"
+  )</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated Word Frequency Plot</div><div class="chart-container" id="chartWordFreq"></div></div>
+        </section>
+
+        <section id="q49-part-11" class="guide-card part-card" data-part="11">
+          <div class="card-header"><div class="part-pill">Part 11</div><h3 class="part-heading">Word Cloud</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create a word cloud</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p11-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p11-code">wordcloud(
+  words = word_frequency$word,
+  freq = word_frequency$n,
+  max.words = 50,
+  random.order = FALSE,
+  colors = brewer.pal(8, "Dark2")
+)</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Interactive Word Cloud Preview</div><div class="sim-cloud-wrapper" id="simWordCloud"></div></div>
+        </section>
+
+        <section id="q49-part-12" class="guide-card part-card" data-part="12">
+          <div class="card-header"><div class="part-pill">Part 12</div><h3 class="part-heading">Bigrams</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Extract two-word combinations</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p12-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p12-code">bigrams <- df %>%
+  unnest_tokens(bigram, clean_text, token = "ngrams", n = 2)
+
+head(bigrams)
+
+bigram_frequency <- bigrams %>% count(bigram, sort = TRUE)
+head(bigram_frequency, 10)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-13" class="guide-card part-card" data-part="13">
+          <div class="card-header"><div class="part-pill">Part 13</div><h3 class="part-heading">Bigram Graph</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Visualize the most common bigrams</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p13-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p13-code">top_bigrams <- bigram_frequency %>% slice_max(n, n = 10)
+
+ggplot(top_bigrams, aes(x = reorder(bigram, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Top 10 Bigrams", x = "Bigram", y = "Frequency")</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated Top Bigrams Plot</div><div class="chart-container" id="chartBigramFreq"></div></div>
+        </section>
+
+        <section id="q49-part-14" class="guide-card part-card" data-part="14">
+          <div class="card-header"><div class="part-pill">Part 14</div><h3 class="part-heading">Bag of Words (BoW)</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create a Bag-of-Words representation</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p14-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p14-code">df_bow <- df %>% mutate(tweet_id = row_number())
+
+bow <- df_bow %>%
+  select(tweet_id, clean_text) %>%
+  unnest_tokens(word, clean_text) %>%
+  count(tweet_id, word) %>%
+  pivot_wider(names_from = word, values_from = n, values_fill = 0)
+
+head(bow)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-15" class="guide-card part-card" data-part="15">
+          <div class="card-header"><div class="part-pill">Part 15</div><h3 class="part-heading">TF-IDF</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Identify important words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p15-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p15-code">tfidf <- df %>%
+  unnest_tokens(word, clean_text) %>%
+  anti_join(stop_words, by = "word") %>%
+  count(airline, word) %>%
+  bind_tf_idf(word, airline, n)
+
+head(tfidf)
+
+top_tfidf <- tfidf %>% arrange(desc(tf_idf))
+head(top_tfidf, 10)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-16" class="guide-card part-card" data-part="16">
+          <div class="card-header"><div class="part-pill">Part 16</div><h3 class="part-heading">Bing Sentiment</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Perform Bing sentiment analysis</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p16-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p16-code">bing <- get_sentiments("bing")
+
+bing_result <- tokens_clean %>%
+  inner_join(bing, by = "word")
+
+head(bing_result)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-17" class="guide-card part-card" data-part="17">
+          <div class="card-header"><div class="part-pill">Part 17</div><h3 class="part-heading">Bing Sentiment Count</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Count positive and negative words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p17-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p17-code">bing_count <- bing_result %>% count(sentiment.y)
+bing_count</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-18" class="guide-card part-card" data-part="18">
+          <div class="card-header"><div class="part-pill">Part 18</div><h3 class="part-heading">Bing Sentiment Graph</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Visualize Bing sentiment</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p18-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p18-code">ggplot(bing_count, aes(x = sentiment.y, y = n)) +
+  geom_col() +
+  labs(title = "Bing Sentiment", x = "Sentiment", y = "Count")</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated Bing Sentiment Graph</div><div class="chart-container" id="chartBingCount"></div></div>
+        </section>
+
+        <section id="q49-part-19" class="guide-card part-card" data-part="19">
+          <div class="card-header"><div class="part-pill">Part 19</div><h3 class="part-heading">Positive Terms</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Find the most common positive words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p19-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p19-code">positive_words <- bing_result %>%
+  filter(sentiment.y == "positive") %>%
+  count(word, sort = TRUE)
+
+head(positive_words, 10)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-20" class="guide-card part-card" data-part="20">
+          <div class="card-header"><div class="part-pill">Part 20</div><h3 class="part-heading">Negative Terms</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Find the most common negative words</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p20-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p20-code">negative_words <- bing_result %>%
+  filter(sentiment.y == "negative") %>%
+  count(word, sort = TRUE)
+
+head(negative_words, 10)</code></pre>
+          </div>
+        </section>
+
+        <section id="q49-part-21" class="guide-card part-card" data-part="21">
+          <div class="card-header"><div class="part-pill">Part 21</div><h3 class="part-heading">Compare Sentiment Across Airlines</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Compare Bing sentiment between airlines</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="p21-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="p21-code">airline_bing <- bing_result %>% count(airline, sentiment.y)
+airline_bing
+
+ggplot(airline_bing, aes(x = airline, y = n, fill = sentiment.y)) +
+  geom_col(position = "dodge") +
+  labs(title = "Bing Sentiment by Airline", x = "Airline", y = "Count", fill = "Sentiment") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated Comparison Plot (Bing Sentiment by Airline)</div><div class="chart-container" id="chartAirlineCompare"></div></div>
+        </section>
+
+        <section id="q49-part-22" class="guide-card part-card" data-part="22">
+          <div class="card-header"><div class="part-pill">Part 22</div><h3 class="part-heading">Conclusion</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Write the conclusion</div>
+          <div class="exam-quote-box conclusion-quote">
+            <div class="quote-header">📋 Ready-to-Submit Conclusion</div>
+            <blockquote>
+              "The Twitter airline dataset was cleaned and processed using basic text-mining techniques. Tokenization and stopword removal prepared the tweets for analysis. Word-frequency and bigram analysis identified common words and phrases. Bag-of-Words and TF-IDF were used to represent the text and identify important terms. Bing sentiment analysis identified positive and negative words and allowed sentiment to be compared across airlines. The analysis helps understand customer opinions and identify common issues in airline services."
+            </blockquote>
+          </div>
+        </section>
+
+        <!-- Checklist Section Q49 -->
+        <section id="q49-checklist" class="guide-card checklist-card">
+          <div class="checklist-header">
+            <div class="hero-tag">JUPYTERLAB AUDIT</div>
+            <h2>✅ Q49: 22-Part Notebook Checklist</h2>
+            <p>Check off each notebook step as you run it in JupyterLab. State is saved in your browser.</p>
+          </div>
+          <div class="checklist-progress-wrap">
+            <div class="checklist-progress-bar"><div class="progress-fill" id="q49ProgressFill"></div></div>
+            <span class="checklist-count" id="q49StatusText">0 of 22 completed</span>
+          </div>
+          <div class="table-responsive">
+            <table class="checklist-table">
+              <thead><tr><th style="width: 45px;">Status</th><th>Notebook Step</th><th>Part</th><th>Key R Code</th></tr></thead>
+              <tbody id="q49ChecklistBody">
+                <tr data-part="1"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-1"></td><td><label for="q49-chk-1"><strong>Install Packages</strong></label></td><td><a href="#q49-part-1">Part 1</a></td><td><code>install.packages(...)</code></td></tr>
+                <tr data-part="2"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-2"></td><td><label for="q49-chk-2"><strong>Load Packages</strong></label></td><td><a href="#q49-part-2">Part 2</a></td><td><code>library(tidyverse)</code></td></tr>
+                <tr data-part="3"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-3"></td><td><label for="q49-chk-3"><strong>Load Dataset</strong></label></td><td><a href="#q49-part-3">Part 3</a></td><td><code>read.csv("Tweets.csv")</code></td></tr>
+                <tr data-part="4"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-4"></td><td><label for="q49-chk-4"><strong>Select Columns</strong></label></td><td><a href="#q49-part-4">Part 4</a></td><td><code>select(...)</code></td></tr>
+                <tr data-part="5"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-5"></td><td><label for="q49-chk-5"><strong>Check Dataset</strong></label></td><td><a href="#q49-part-5">Part 5</a></td><td><code>dim()</code>, <code>table()</code></td></tr>
+                <tr data-part="6"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-6"></td><td><label for="q49-chk-6"><strong>Clean Tweets</strong></label></td><td><a href="#q49-part-6">Part 6</a></td><td><code>str_to_lower</code>, <code>str_squish</code></td></tr>
+                <tr data-part="7"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-7"></td><td><label for="q49-chk-7"><strong>Tokenization</strong></label></td><td><a href="#q49-part-7">Part 7</a></td><td><code>unnest_tokens()</code></td></tr>
+                <tr data-part="8"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-8"></td><td><label for="q49-chk-8"><strong>Stopword Removal</strong></label></td><td><a href="#q49-part-8">Part 8</a></td><td><code>anti_join(stop_words)</code></td></tr>
+                <tr data-part="9"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-9"></td><td><label for="q49-chk-9"><strong>Word Frequency</strong></label></td><td><a href="#q49-part-9">Part 9</a></td><td><code>count(word, sort = TRUE)</code></td></tr>
+                <tr data-part="10"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-10"></td><td><label for="q49-chk-10"><strong>Word Frequency Graph</strong></label></td><td><a href="#q49-part-10">Part 10</a></td><td><code>geom_col() + coord_flip()</code></td></tr>
+                <tr data-part="11"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-11"></td><td><label for="q49-chk-11"><strong>Word Cloud</strong></label></td><td><a href="#q49-part-11">Part 11</a></td><td><code>wordcloud(...)</code></td></tr>
+                <tr data-part="12"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-12"></td><td><label for="q49-chk-12"><strong>Bigrams</strong></label></td><td><a href="#q49-part-12">Part 12</a></td><td><code>token = "ngrams", n = 2</code></td></tr>
+                <tr data-part="13"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-13"></td><td><label for="q49-chk-13"><strong>Bigram Graph</strong></label></td><td><a href="#q49-part-13">Part 13</a></td><td><code>geom_col() + coord_flip()</code></td></tr>
+                <tr data-part="14"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-14"></td><td><label for="q49-chk-14"><strong>Bag of Words</strong></label></td><td><a href="#q49-part-14">Part 14</a></td><td><code>pivot_wider(...)</code></td></tr>
+                <tr data-part="15"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-15"></td><td><label for="q49-chk-15"><strong>TF-IDF</strong></label></td><td><a href="#q49-part-15">Part 15</a></td><td><code>bind_tf_idf()</code></td></tr>
+                <tr data-part="16"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-16"></td><td><label for="q49-chk-16"><strong>Bing Sentiment</strong></label></td><td><a href="#q49-part-16">Part 16</a></td><td><code>get_sentiments("bing")</code></td></tr>
+                <tr data-part="17"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-17"></td><td><label for="q49-chk-17"><strong>Bing Count</strong></label></td><td><a href="#q49-part-17">Part 17</a></td><td><code>count(sentiment.y)</code></td></tr>
+                <tr data-part="18"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-18"></td><td><label for="q49-chk-18"><strong>Bing Graph</strong></label></td><td><a href="#q49-part-18">Part 18</a></td><td><code>geom_col()</code></td></tr>
+                <tr data-part="19"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-19"></td><td><label for="q49-chk-19"><strong>Positive Terms</strong></label></td><td><a href="#q49-part-19">Part 19</a></td><td><code>filter(sentiment.y == "positive")</code></td></tr>
+                <tr data-part="20"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-20"></td><td><label for="q49-chk-20"><strong>Negative Terms</strong></label></td><td><a href="#q49-part-20">Part 20</a></td><td><code>filter(sentiment.y == "negative")</code></td></tr>
+                <tr data-part="21"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-21"></td><td><label for="q49-chk-21"><strong>Compare Airlines</strong></label></td><td><a href="#q49-part-21">Part 21</a></td><td><code>geom_col(position = "dodge")</code></td></tr>
+                <tr data-part="22"><td><input type="checkbox" class="chk-item q49-chk" id="q49-chk-22"></td><td><label for="q49-chk-22"><strong>Conclusion</strong></label></td><td><a href="#q49-part-22">Part 22</a></td><td>Final summary text</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- VIEW: Q47 (CO2 TIME SERIES ANALYSIS & FORECASTING) -->
+      <!-- ================================================================= -->
+      <div id="view-q47" class="question-view" style="display: none;">
+        <section id="q47-overview" class="guide-card hero-card">
+          <div class="hero-header">
+            <div class="hero-tag">Complete JupyterLab R Notebook</div>
+            <h2>Q47 — Time Series Analysis and Forecasting in R</h2>
+            <p class="hero-desc">
+              Exam-friendly guide using R's built-in <strong><code>co2</code></strong> dataset (monthly atmospheric CO₂ concentration). Evaluates <strong>Seasonal Naive</strong>, <strong>Holt / Exponential Smoothing</strong>, and <strong>ARIMA</strong> with MAE, RMSE, MAPE and generates a 12-month future forecast.
+            </p>
+          </div>
+
+          <div class="dataset-meta-grid">
+            <div class="meta-box"><span class="meta-label">Built-in Dataset</span><span class="meta-val"><code>data(co2)</code> (No download needed)</span></div>
+            <div class="meta-box"><span class="meta-label">Frequency / Period</span><span class="meta-val">Monthly (<code>freq = 12</code>)</span></div>
+            <div class="meta-box"><span class="meta-label">Models Evaluated</span><span class="meta-val">Seasonal Naive, Holt, ARIMA</span></div>
+            <div class="meta-box"><span class="meta-label">Evaluation Metrics</span><span class="meta-val">MAE, RMSE, MAPE</span></div>
+          </div>
+
+          <div class="interactive-sandbox-bar">
+            <div class="sandbox-title">⚡ Zero External Downloads Needed</div>
+            <p>Runs 100% offline once the <code>forecast</code> and <code>ggplot2</code> packages are installed. Covers all 9 requirements without unnecessary advanced models.</p>
+          </div>
+
+          <div class="overview-actions">
+            <button class="btn btn-primary q-copy-all-btn" data-question="q47" title="Copy all 19 parts of Q47 code only">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy All Q47 Code (19 Parts)</span>
+            </button>
+            <button class="btn btn-outline q-download-btn" data-question="q47" title="Download Q47 code as .R script file">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Q47 Script (.R)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Q47 Parts 1 to 19 -->
+        <section id="q47-part-1" class="guide-card part-card" data-part="1">
+          <div class="card-header"><div class="part-pill">Part 1</div><h3 class="part-heading">Install Required Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Install the forecasting packages</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script (Run Once)</span><button class="copy-btn" data-clipboard="q47-p1-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p1-code">install.packages("forecast")
+install.packages("ggplot2")</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-2" class="guide-card part-card" data-part="2">
+          <div class="card-header"><div class="part-pill">Part 2</div><h3 class="part-heading">Load Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load the required packages</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p2-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p2-code">library(forecast)
+library(ggplot2)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-3" class="guide-card part-card" data-part="3">
+          <div class="card-header"><div class="part-pill">Part 3</div><h3 class="part-heading">Load the Dataset</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load the built-in CO2 time series</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p3-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p3-code">data(co2)
+co2</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-4" class="guide-card part-card" data-part="4">
+          <div class="card-header"><div class="part-pill">Part 4</div><h3 class="part-heading">Understand the Dataset</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Check the time series</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p4-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p4-code">start(co2)
+end(co2)
+frequency(co2)
+length(co2)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-5" class="guide-card part-card" data-part="5">
+          <div class="card-header"><div class="part-pill">Part 5</div><h3 class="part-heading">Visualize the Time Series</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Plot the CO2 time series</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p5-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p5-code">plot(
+  co2,
+  main = "Monthly CO2 Time Series",
+  xlab = "Year",
+  ylab = "CO2 Concentration"
+)</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated Time Series: Monthly CO2 Concentration (1959 - 1997)</div><div class="chart-container" id="chartCo2Series"></div></div>
+        </section>
+
+        <section id="q47-part-6" class="guide-card part-card" data-part="6">
+          <div class="card-header"><div class="part-pill">Part 6</div><h3 class="part-heading">Identify Trend and Seasonality</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Observe the trend and seasonal pattern</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p6-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p6-code">plot(
+  co2,
+  main = "Trend and Seasonal Pattern of CO2",
+  xlab = "Year",
+  ylab = "CO2"
+)</code></pre>
+          </div>
+          <div class="exam-quote-box">
+            <div class="quote-header">📝 Simple Interpretation to Write</div>
+            <blockquote>
+              "The CO₂ series shows an overall increasing trend over time. It also shows a repeating seasonal pattern every year. The seasonal changes are visible as regular rises and falls in the series. Therefore, the data contains both trend and seasonality."
+            </blockquote>
+          </div>
+        </section>
+
+        <section id="q47-part-7" class="guide-card part-card" data-part="7">
+          <div class="card-header"><div class="part-pill">Part 7</div><h3 class="part-heading">Time-Series Decomposition</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Decompose the time series</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p7-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p7-code">decomp <- decompose(co2)
+plot(decomp)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-8" class="guide-card part-card" data-part="8">
+          <div class="card-header"><div class="part-pill">Part 8</div><h3 class="part-heading">Split into Training and Testing Data</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Divide the data into training and testing sets</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p8-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p8-code">train <- window(
+  co2,
+  end = c(1996, 12)
+)
+
+test <- window(
+  co2,
+  start = c(1997, 1)
+)
+
+length(train)
+length(test)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-9" class="guide-card part-card" data-part="9">
+          <div class="card-header"><div class="part-pill">Part 9</div><h3 class="part-heading">Seasonal Naive Model</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Build the Seasonal Naive model</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p9-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p9-code">model_snaive <- snaive(
+  train,
+  h = 12
+)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-10" class="guide-card part-card" data-part="10">
+          <div class="card-header"><div class="part-pill">Part 10</div><h3 class="part-heading">Holt / Exponential Smoothing Model</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Build the Holt model</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p10-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p10-code">model_holt <- holt(
+  train,
+  h = 12
+)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-11" class="guide-card part-card" data-part="11">
+          <div class="card-header"><div class="part-pill">Part 11</div><h3 class="part-heading">ARIMA Model</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Build the ARIMA model</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p11-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p11-code">model_arima <- auto.arima(
+  train
+)
+
+forecast_arima <- forecast(
+  model_arima,
+  h = 12
+)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-12" class="guide-card part-card" data-part="12">
+          <div class="card-header"><div class="part-pill">Part 12</div><h3 class="part-heading">Generate Test Forecasts</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Forecast the testing period</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p12-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p12-code">forecast_snaive <- forecast(model_snaive, h = 12)
+forecast_holt <- forecast(model_holt, h = 12)
+forecast_arima</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-13" class="guide-card part-card" data-part="13">
+          <div class="card-header"><div class="part-pill">Part 13</div><h3 class="part-heading">Compare Actual and Forecast Values</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Compare forecasts with the test data</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p13-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p13-code">accuracy(forecast_snaive, test)
+accuracy(forecast_holt, test)
+accuracy(forecast_arima, test)</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-14" class="guide-card part-card" data-part="14">
+          <div class="card-header"><div class="part-pill">Part 14</div><h3 class="part-heading">Get MAE, RMSE and MAPE</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Calculate the required evaluation metrics</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p14-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p14-code">snaive_accuracy <- accuracy(forecast_snaive, test)
+holt_accuracy <- accuracy(forecast_holt, test)
+arima_accuracy <- accuracy(forecast_arima, test)
+
+snaive_accuracy[, c("MAE", "RMSE", "MAPE")]
+holt_accuracy[, c("MAE", "RMSE", "MAPE")]
+arima_accuracy[, c("MAE", "RMSE", "MAPE")]</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-15" class="guide-card part-card" data-part="15">
+          <div class="card-header"><div class="part-pill">Part 15</div><h3 class="part-heading">Compare All Three Models</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create a simple model comparison table</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p15-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p15-code">comparison <- data.frame(
+  Model = c(
+    "Seasonal Naive",
+    "Holt",
+    "ARIMA"
+  ),
+  
+  MAE = c(
+    snaive_accuracy[2, "MAE"],
+    holt_accuracy[2, "MAE"],
+    arima_accuracy[2, "MAE"]
+  ),
+  
+  RMSE = c(
+    snaive_accuracy[2, "RMSE"],
+    holt_accuracy[2, "RMSE"],
+    arima_accuracy[2, "RMSE"]
+  ),
+  
+  MAPE = c(
+    snaive_accuracy[2, "MAPE"],
+    holt_accuracy[2, "MAPE"],
+    arima_accuracy[2, "MAPE"]
+  )
+)
+
+comparison</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-16" class="guide-card part-card" data-part="16">
+          <div class="card-header"><div class="part-pill">Part 16</div><h3 class="part-heading">Select the Best Model</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Find the model with the lowest RMSE</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p16-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p16-code">best_model <- comparison$Model[
+  which.min(comparison$RMSE)
+]
+
+best_model</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-17" class="guide-card part-card" data-part="17">
+          <div class="card-header"><div class="part-pill">Part 17</div><h3 class="part-heading">12-Month Future Forecast</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Forecast the next 12 months</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p17-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p17-code">final_model <- auto.arima(co2)
+
+final_forecast <- forecast(
+  final_model,
+  h = 12
+)
+
+final_forecast</code></pre>
+          </div>
+        </section>
+
+        <section id="q47-part-18" class="guide-card part-card" data-part="18">
+          <div class="card-header"><div class="part-pill">Part 18</div><h3 class="part-heading">Plot the 12-Month Forecast</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Visualize the future forecast</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q47-p18-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q47-p18-code">plot(
+  final_forecast,
+  main = "12-Month CO2 Forecast",
+  xlab = "Year",
+  ylab = "CO2 Concentration"
+)</code></pre>
+          </div>
+          <div class="output-preview"><div class="preview-title">Simulated 12-Month Future Forecast with Confidence Intervals</div><div class="chart-container" id="chartCo2Forecast"></div></div>
+        </section>
+
+        <section id="q47-part-19" class="guide-card part-card" data-part="19">
+          <div class="card-header"><div class="part-pill">Part 19</div><h3 class="part-heading">Simple Business Interpretation</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Final interpretation</div>
+          <div class="exam-quote-box conclusion-quote">
+            <div class="quote-header">📋 Ready-to-Submit Business Interpretation</div>
+            <blockquote>
+              "The CO₂ time series shows a clear increasing trend along with a repeating yearly seasonal pattern. Time-series decomposition confirms the presence of trend and seasonal components. The data was divided into training and testing sets, and Seasonal Naive, Holt and ARIMA models were evaluated. The models were compared using MAE, RMSE and MAPE, where lower values indicate better forecasting performance. The model with the lowest overall error was selected for the final forecast. The 12-month forecast provides an estimate of future CO₂ levels and can help organizations plan environmental monitoring and sustainability activities."
+            </blockquote>
+          </div>
+        </section>
+
+        <!-- Checklist Section Q47 -->
+        <section id="q47-checklist" class="guide-card checklist-card">
+          <div class="checklist-header">
+            <div class="hero-tag">JUPYTERLAB AUDIT</div>
+            <h2>✅ Q47: 19-Part Notebook Checklist</h2>
+            <p>Check off each time-series step as you run it in JupyterLab. State is saved automatically.</p>
+          </div>
+          <div class="checklist-progress-wrap">
+            <div class="checklist-progress-bar"><div class="progress-fill" id="q47ProgressFill"></div></div>
+            <span class="checklist-count" id="q47StatusText">0 of 19 completed</span>
+          </div>
+          <div class="table-responsive">
+            <table class="checklist-table">
+              <thead><tr><th style="width: 45px;">Status</th><th>Notebook Step</th><th>Part</th><th>Key R Code</th></tr></thead>
+              <tbody id="q47ChecklistBody">
+                <tr data-part="1"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-1"></td><td><label for="q47-chk-1"><strong>Install Packages</strong></label></td><td><a href="#q47-part-1">Part 1</a></td><td><code>install.packages("forecast")</code></td></tr>
+                <tr data-part="2"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-2"></td><td><label for="q47-chk-2"><strong>Load Packages</strong></label></td><td><a href="#q47-part-2">Part 2</a></td><td><code>library(forecast)</code>, <code>ggplot2</code></td></tr>
+                <tr data-part="3"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-3"></td><td><label for="q47-chk-3"><strong>Load Dataset</strong></label></td><td><a href="#q47-part-3">Part 3</a></td><td><code>data(co2)</code></td></tr>
+                <tr data-part="4"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-4"></td><td><label for="q47-chk-4"><strong>Understand Dataset</strong></label></td><td><a href="#q47-part-4">Part 4</a></td><td><code>start()</code>, <code>frequency()</code></td></tr>
+                <tr data-part="5"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-5"></td><td><label for="q47-chk-5"><strong>Visualize Series</strong></label></td><td><a href="#q47-part-5">Part 5</a></td><td><code>plot(co2)</code></td></tr>
+                <tr data-part="6"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-6"></td><td><label for="q47-chk-6"><strong>Trend &amp; Seasonality</strong></label></td><td><a href="#q47-part-6">Part 6</a></td><td>Interpretation note</td></tr>
+                <tr data-part="7"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-7"></td><td><label for="q47-chk-7"><strong>Decomposition</strong></label></td><td><a href="#q47-part-7">Part 7</a></td><td><code>decompose(co2)</code></td></tr>
+                <tr data-part="8"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-8"></td><td><label for="q47-chk-8"><strong>Train / Test Split</strong></label></td><td><a href="#q47-part-8">Part 8</a></td><td><code>window(co2, end/start)</code></td></tr>
+                <tr data-part="9"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-9"></td><td><label for="q47-chk-9"><strong>Seasonal Naive</strong></label></td><td><a href="#q47-part-9">Part 9</a></td><td><code>snaive(train, h = 12)</code></td></tr>
+                <tr data-part="10"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-10"></td><td><label for="q47-chk-10"><strong>Holt Model</strong></label></td><td><a href="#q47-part-10">Part 10</a></td><td><code>holt(train, h = 12)</code></td></tr>
+                <tr data-part="11"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-11"></td><td><label for="q47-chk-11"><strong>ARIMA Model</strong></label></td><td><a href="#q47-part-11">Part 11</a></td><td><code>auto.arima(train)</code></td></tr>
+                <tr data-part="12"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-12"></td><td><label for="q47-chk-12"><strong>Test Forecasts</strong></label></td><td><a href="#q47-part-12">Part 12</a></td><td><code>forecast(..., h = 12)</code></td></tr>
+                <tr data-part="13"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-13"></td><td><label for="q47-chk-13"><strong>Compare with Test</strong></label></td><td><a href="#q47-part-13">Part 13</a></td><td><code>accuracy(forecast, test)</code></td></tr>
+                <tr data-part="14"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-14"></td><td><label for="q47-chk-14"><strong>MAE, RMSE, MAPE</strong></label></td><td><a href="#q47-part-14">Part 14</a></td><td>Extraction of key error metrics</td></tr>
+                <tr data-part="15"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-15"></td><td><label for="q47-chk-15"><strong>Compare Models</strong></label></td><td><a href="#q47-part-15">Part 15</a></td><td><code>data.frame(Model, MAE, ...)</code></td></tr>
+                <tr data-part="16"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-16"></td><td><label for="q47-chk-16"><strong>Select Best Model</strong></label></td><td><a href="#q47-part-16">Part 16</a></td><td><code>which.min(comparison$RMSE)</code></td></tr>
+                <tr data-part="17"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-17"></td><td><label for="q47-chk-17"><strong>12-Month Forecast</strong></label></td><td><a href="#q47-part-17">Part 17</a></td><td><code>auto.arima(co2)</code></td></tr>
+                <tr data-part="18"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-18"></td><td><label for="q47-chk-18"><strong>Forecast Graph</strong></label></td><td><a href="#q47-part-18">Part 18</a></td><td><code>plot(final_forecast)</code></td></tr>
+                <tr data-part="19"><td><input type="checkbox" class="chk-item q47-chk" id="q47-chk-19"></td><td><label for="q47-chk-19"><strong>Interpretation</strong></label></td><td><a href="#q47-part-19">Part 19</a></td><td>Business conclusion</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- VIEW: Q50 (STUDENT ANALYTICS SHINY DASHBOARD) -->
+      <!-- ================================================================= -->
+      <div id="view-q50" class="question-view" style="display: none;">
+        <section id="q50-overview" class="guide-card hero-card">
+          <div class="hero-header">
+            <div class="hero-tag">R Shiny Interactive Dashboard</div>
+            <h2>Q50 — Student Analytics Dashboard in R Shiny</h2>
+            <p class="hero-desc">
+              Simple, exam-friendly Shiny application with reactive filtering by <strong>Department</strong>, <strong>Semester</strong>, and <strong>Minimum Mark</strong>. Displays 3 KPIs, a dynamic student table via <code>DT</code>, a marks histogram, and department-wise average bar chart.
+            </p>
+          </div>
+
+          <div class="dataset-meta-grid">
+            <div class="meta-box"><span class="meta-label">Dashboard Type</span><span class="meta-val">Single-file <code>shinyApp(ui, server)</code></span></div>
+            <div class="meta-box"><span class="meta-label">Input Filters</span><span class="meta-val">Department, Semester, Min Mark</span></div>
+            <div class="meta-box"><span class="meta-label">Reactive Core</span><span class="meta-val"><code>filtered_data <- reactive({...})</code></span></div>
+            <div class="meta-box"><span class="meta-label">Output Types</span><span class="meta-val">KPIs, DT Table, 2 ggplot2 Plots</span></div>
+          </div>
+
+          <div class="interactive-sandbox-bar">
+            <div class="sandbox-title">⚡ Interactive Architecture Flow</div>
+            <p><strong>Filters</strong> (Department + Semester + Min Mark) &rarr; <strong><code>reactive()</code></strong> &rarr; <strong>KPIs</strong> (Total Students, Avg Mark, Avg Attendance) + <strong>DT Table</strong> + <strong>Marks Distribution</strong> + <strong>Dept Average</strong>.</p>
+          </div>
+
+          <div class="overview-actions">
+            <button class="btn btn-primary q-copy-all-btn" data-question="q50" title="Copy all 6 parts of Q50 code only">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy All Q50 Code (6 Parts)</span>
+            </button>
+            <button class="btn btn-outline q-download-btn" data-question="q50" title="Download Q50 code as .R script file">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Q50 Script (.R)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Q50 Part 1 -->
+        <section id="q50-part-1" class="guide-card part-card" data-part="1">
+          <div class="card-header"><div class="part-pill">Part 1</div><h3 class="part-heading">Install Shiny Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Install required packages</div>
+          <p class="part-intro">Run this <strong>once</strong> in JupyterLab or RStudio:</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script (Run Once)</span><button class="copy-btn" data-clipboard="q50-p1-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p1-code">install.packages("shiny")
+install.packages("DT")
+install.packages("ggplot2")</code></pre>
+          </div>
+        </section>
+
+        <!-- Q50 Part 2 -->
+        <section id="q50-part-2" class="guide-card part-card" data-part="2">
+          <div class="card-header"><div class="part-pill">Part 2</div><h3 class="part-heading">Load Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load required packages</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q50-p2-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p2-code">library(shiny)
+library(DT)
+library(ggplot2)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q50 Part 3 -->
+        <section id="q50-part-3" class="guide-card part-card" data-part="3">
+          <div class="card-header"><div class="part-pill">Part 3</div><h3 class="part-heading">Create Student Dataset</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create a simple student dataset</div>
+          <p class="part-intro">Creates an in-memory dataset of 20 students. (If you have a CSV, replace with <code>read.csv()</code>).</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q50-p3-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p3-code">students <- data.frame(
+  Student_ID = 1:20,
+  Name = paste("Student", 1:20),
+  Gender = c(
+    "Male","Female","Male","Female","Male",
+    "Female","Male","Female","Male","Female",
+    "Male","Female","Male","Female","Male",
+    "Female","Male","Female","Male","Female"
+  ),
+  Department = c(
+    "CSE","CSE","ECE","ECE","EEE",
+    "EEE","CSE","CSE","ECE","EEE",
+    "CSE","ECE","EEE","CSE","ECE",
+    "EEE","CSE","ECE","EEE","CSE"
+  ),
+  Semester = c(
+    1,2,3,4,5,6,1,2,3,4,
+    5,6,1,2,3,4,5,6,1,2
+  ),
+  Mark = c(
+    78,85,67,90,72,
+    88,95,61,76,82,
+    91,69,74,87,93,
+    65,80,71,89,96
+  ),
+  Attendance = c(
+    85,90,75,95,80,
+    92,98,70,82,88,
+    94,78,81,91,96,
+    72,86,79,93,97
+  )
+)
+
+head(students)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q50 Part 4 -->
+        <section id="q50-part-4" class="guide-card part-card" data-part="4">
+          <div class="card-header"><div class="part-pill">Part 4</div><h3 class="part-heading">Create the UI</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create the dashboard interface</div>
+          <p class="part-intro">Defines the sidebar with 2 dropdowns and 1 slider, plus main panel with KPIs, table, and 2 plots.</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q50-p4-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p4-code">ui <- fluidPage(
+  
+  titlePanel("Student Analytics Dashboard"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      
+      selectInput(
+        "department",
+        "Department:",
+        choices = c("All", unique(students$Department))
+      ),
+      
+      selectInput(
+        "semester",
+        "Semester:",
+        choices = c("All", unique(students$Semester))
+      ),
+      
+      sliderInput(
+        "min_mark",
+        "Minimum Mark:",
+        min = 0,
+        max = 100,
+        value = 0
+      )
+    ),
+    
+    mainPanel(
+      
+      h3("Key Performance Indicators"),
+      
+      fluidRow(
+        column(4, h4("Total Students"), textOutput("total_students")),
+        column(4, h4("Average Mark"), textOutput("average_mark")),
+        column(4, h4("Average Attendance"), textOutput("average_attendance"))
+      ),
+      
+      h3("Filtered Students"),
+      DTOutput("student_table"),
+      
+      h3("Marks Distribution"),
+      plotOutput("marks_plot"),
+      
+      h3("Department-wise Average Marks"),
+      plotOutput("department_plot")
+    )
+  )
+)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q50 Part 5 -->
+        <section id="q50-part-5" class="guide-card part-card" data-part="5">
+          <div class="card-header"><div class="part-pill">Part 5</div><h3 class="part-heading">Create the Server</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create the dashboard logic</div>
+          <p class="part-intro">Contains the <code>reactive()</code> data filtering expression that recalculates automatically when inputs change.</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q50-p5-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p5-code">server <- function(input, output) {
+  
+  filtered_data <- reactive({
+    
+    data <- students
+    
+    if (input$department != "All") {
+      data <- data[data$Department == input$department, ]
+    }
+    
+    if (input$semester != "All") {
+      data <- data[data$Semester == as.numeric(input$semester), ]
+    }
+    
+    data <- data[data$Mark >= input$min_mark, ]
+    
+    data
+  })
+  
+  
+  output$total_students <- renderText({
+    nrow(filtered_data())
+  })
+  
+  
+  output$average_mark <- renderText({
+    round(mean(filtered_data()$Mark), 2)
+  })
+  
+  
+  output$average_attendance <- renderText({
+    round(mean(filtered_data()$Attendance), 2)
+  })
+  
+  
+  output$student_table <- renderDT({
+    filtered_data()
+  })
+  
+  
+  output$marks_plot <- renderPlot({
+    
+    ggplot(
+      filtered_data(),
+      aes(x = Mark)
+    ) +
+      geom_histogram(
+        bins = 10
+      ) +
+      labs(
+        title = "Marks Distribution",
+        x = "Mark",
+        y = "Number of Students"
+      )
+  })
+  
+  
+  output$department_plot <- renderPlot({
+    
+    dept_data <- filtered_data() %>%
+      group_by(Department) %>%
+      summarise(
+        Average_Mark = mean(Mark)
+      )
+    
+    ggplot(
+      dept_data,
+      aes(x = Department, y = Average_Mark)
+    ) +
+      geom_col() +
+      labs(
+        title = "Department-wise Average Marks",
+        x = "Department",
+        y = "Average Mark"
+      )
+  })
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Q50 Part 6 -->
+        <section id="q50-part-6" class="guide-card part-card" data-part="6">
+          <div class="card-header"><div class="part-pill">Part 6</div><h3 class="part-heading">Run the Dashboard</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Run the Shiny dashboard</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q50-p6-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q50-p6-code">shinyApp(ui = ui, server = server)</code></pre>
+          </div>
+          <div class="explanation-box">
+            <h4>💡 How to Run in JupyterLab</h4>
+            <p>Paste the parts in order into your notebook. When <code>shinyApp()</code> executes, the interactive Shiny dashboard will launch directly inside your session!</p>
+          </div>
+        </section>
+
+        <!-- Q50 Interactive Simulation Widget -->
+        <div class="widget-box" id="q50-simulator">
+          <div class="widget-header"><span class="widget-badge">LIVE DEMO</span><strong>Interactive Shiny App Simulator (Q50)</strong></div>
+          <div class="shiny-sim-container">
+            <div class="shiny-sim-sidebar">
+              <div class="input-group">
+                <label for="simQ50Dept">Department:</label>
+                <select id="simQ50Dept" class="sim-select">
+                  <option value="All">All</option>
+                  <option value="CSE">CSE</option>
+                  <option value="ECE">ECE</option>
+                  <option value="EEE">EEE</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="simQ50Sem">Semester:</label>
+                <select id="simQ50Sem" class="sim-select">
+                  <option value="All">All</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="simQ50MinMark">Minimum Mark: <span id="simQ50MinMarkVal" style="color:var(--accent-cyan); font-weight:700;">0</span></label>
+                <input type="range" id="simQ50MinMark" min="0" max="100" value="0" class="sim-slider">
+              </div>
+            </div>
+            <div class="shiny-sim-main">
+              <div class="shiny-sim-kpis">
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Total Students</span><span class="sim-kpi-val" id="simQ50TotalStudents">20</span></div>
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Average Mark</span><span class="sim-kpi-val" id="simQ50AvgMark">80.2</span></div>
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Avg Attendance</span><span class="sim-kpi-val" id="simQ50AvgAtt">85.4%</span></div>
+              </div>
+              <div class="table-responsive" style="max-height: 140px; overflow-y: auto; margin-top: 8px;">
+                <table class="sim-table" id="simQ50Table">
+                  <thead><tr><th>ID</th><th>Name</th><th>Dept</th><th>Sem</th><th>Mark</th><th>Attendance</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q50 Requirements Mapping -->
+        <section id="q50-summary" class="guide-card">
+          <div class="card-header"><h3 class="part-heading">Q50 — What each part does</h3></div>
+          <div class="table-responsive">
+            <table class="sim-table">
+              <thead><tr><th>Requirement</th><th>Shiny Function</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>Department filter</td><td><code>selectInput("department", ...)</code></td><td>Dropdown selection with "All" and unique depts</td></tr>
+                <tr><td>Semester filter</td><td><code>selectInput("semester", ...)</code></td><td>Dropdown selection with "All" and 1 to 6</td></tr>
+                <tr><td>Minimum mark</td><td><code>sliderInput("min_mark", ...)</code></td><td>Numeric slider from 0 to 100</td></tr>
+                <tr><td>Reactive filtering</td><td><code>reactive({...})</code></td><td>Recalculates subset whenever user moves inputs</td></tr>
+                <tr><td>Total students KPI</td><td><code>nrow(filtered_data())</code></td><td>Outputs count of filtered students</td></tr>
+                <tr><td>Average mark KPI</td><td><code>mean(filtered_data()$Mark)</code></td><td>Calculates mean mark rounded to 2 decimals</td></tr>
+                <tr><td>Average attendance KPI</td><td><code>mean(filtered_data()$Attendance)</code></td><td>Calculates average attendance percentage</td></tr>
+                <tr><td>Student table</td><td><code>renderDT()</code> / <code>DTOutput()</code></td><td>Interactive sortable data table</td></tr>
+                <tr><td>Marks distribution</td><td><code>geom_histogram(bins = 10)</code></td><td>Frequency distribution of marks</td></tr>
+                <tr><td>Department average</td><td><code>geom_col()</code></td><td>Bar chart comparing average marks by dept</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Checklist Section Q50 -->
+        <section id="q50-checklist" class="guide-card checklist-card">
+          <div class="checklist-header">
+            <div class="hero-tag">JUPYTERLAB AUDIT</div>
+            <h2>✅ Q50: Student Analytics Checklist</h2>
+            <p>Check off each Shiny step as you test it in JupyterLab. State is saved automatically.</p>
+          </div>
+          <div class="checklist-progress-wrap">
+            <div class="checklist-progress-bar"><div class="progress-fill" id="q50ProgressFill"></div></div>
+            <span class="checklist-count" id="q50StatusText">0 of 6 completed</span>
+          </div>
+          <div class="table-responsive">
+            <table class="checklist-table">
+              <thead><tr><th style="width: 45px;">Status</th><th>Notebook Step</th><th>Part</th><th>Key R Code</th></tr></thead>
+              <tbody id="q50ChecklistBody">
+                <tr data-part="1"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-1"></td><td><label for="q50-chk-1"><strong>Install Packages</strong></label></td><td><a href="#q50-part-1">Part 1</a></td><td><code>install.packages("shiny", "DT", "ggplot2")</code></td></tr>
+                <tr data-part="2"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-2"></td><td><label for="q50-chk-2"><strong>Load Packages</strong></label></td><td><a href="#q50-part-2">Part 2</a></td><td><code>library(shiny)</code>, <code>library(DT)</code></td></tr>
+                <tr data-part="3"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-3"></td><td><label for="q50-chk-3"><strong>Create Dataset</strong></label></td><td><a href="#q50-part-3">Part 3</a></td><td><code>students <- data.frame(...)</code></td></tr>
+                <tr data-part="4"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-4"></td><td><label for="q50-chk-4"><strong>Create UI</strong></label></td><td><a href="#q50-part-4">Part 4</a></td><td><code>fluidPage(sidebarLayout(...))</code></td></tr>
+                <tr data-part="5"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-5"></td><td><label for="q50-chk-5"><strong>Create Server</strong></label></td><td><a href="#q50-part-5">Part 5</a></td><td><code>server <- function(input, output) {...}</code></td></tr>
+                <tr data-part="6"><td><input type="checkbox" class="chk-item q50-chk" id="q50-chk-6"></td><td><label for="q50-chk-6"><strong>Run Dashboard</strong></label></td><td><a href="#q50-part-6">Part 6</a></td><td><code>shinyApp(ui = ui, server = server)</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- VIEW: Q51 (CAR ANALYTICS SHINY DASHBOARD - MTCARS) -->
+      <!-- ================================================================= -->
+      <div id="view-q51" class="question-view" style="display: none;">
+        <section id="q51-overview" class="guide-card hero-card">
+          <div class="hero-header">
+            <div class="hero-tag">R Shiny Interactive Dashboard</div>
+            <h2>Q51 — Car Analytics Dashboard in R Shiny</h2>
+            <p class="hero-desc">
+              Car Analytics Dashboard using R's built-in <strong><code>mtcars</code></strong> dataset. Features reactive filtering with <strong>Cylinder checkbox groups</strong> (4, 6, 8) and an <strong>MPG slider</strong>, rendering 3 KPIs, a filtered table, an MPG histogram, and a cylinder-wise bar chart.
+            </p>
+          </div>
+
+          <div class="dataset-meta-grid">
+            <div class="meta-box"><span class="meta-label">Built-in Dataset</span><span class="meta-val"><code>data(mtcars)</code> (Offline ready)</span></div>
+            <div class="meta-box"><span class="meta-label">Input Filters</span><span class="meta-val">Cylinder Checkboxes, Min MPG Slider</span></div>
+            <div class="meta-box"><span class="meta-label">Reactive Core</span><span class="meta-val"><code>filtered_data <- reactive({...})</code></span></div>
+            <div class="meta-box"><span class="meta-label">Output Types</span><span class="meta-val">KPIs, DT Table, 2 ggplot2 Plots</span></div>
+          </div>
+
+          <div class="interactive-sandbox-bar">
+            <div class="sandbox-title">⚡ Interactive Architecture Flow</div>
+            <p><strong>Filters</strong> (Cylinders [4,6,8] + Min MPG) &rarr; <strong><code>reactive()</code></strong> &rarr; <strong>KPIs</strong> (Number of Cars, Avg MPG, Avg HP) + <strong>Filtered Table</strong> + <strong>MPG Histogram</strong> + <strong>Cylinder Average MPG</strong>.</p>
+          </div>
+
+          <div class="overview-actions">
+            <button class="btn btn-primary q-copy-all-btn" data-question="q51" title="Copy all 6 parts of Q51 code only">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy All Q51 Code (6 Parts)</span>
+            </button>
+            <button class="btn btn-outline q-download-btn" data-question="q51" title="Download Q51 code as .R script file">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Q51 Script (.R)</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Q51 Part 1 -->
+        <section id="q51-part-1" class="guide-card part-card" data-part="1">
+          <div class="card-header"><div class="part-pill">Part 1</div><h3 class="part-heading">Install Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Install packages</div>
+          <p class="part-intro">Run once if not already installed:</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script (Run Once)</span><button class="copy-btn" data-clipboard="q51-p1-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p1-code">install.packages("shiny")
+install.packages("DT")
+install.packages("ggplot2")</code></pre>
+          </div>
+        </section>
+
+        <!-- Q51 Part 2 -->
+        <section id="q51-part-2" class="guide-card part-card" data-part="2">
+          <div class="card-header"><div class="part-pill">Part 2</div><h3 class="part-heading">Load Packages</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load packages</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q51-p2-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p2-code">library(shiny)
+library(DT)
+library(ggplot2)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q51 Part 3 -->
+        <section id="q51-part-3" class="guide-card part-card" data-part="3">
+          <div class="card-header"><div class="part-pill">Part 3</div><h3 class="part-heading">Load mtcars</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Load the built-in car dataset</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q51-p3-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p3-code">data(mtcars)
+
+head(mtcars)</code></pre>
+          </div>
+          <div class="explanation-box">
+            <h4>💡 No Downloads Needed</h4>
+            <p><code>mtcars</code> is included with R, containing fuel consumption and 10 aspects of automobile design for 32 automobiles.</p>
+          </div>
+        </section>
+
+        <!-- Q51 Part 4 -->
+        <section id="q51-part-4" class="guide-card part-card" data-part="4">
+          <div class="card-header"><div class="part-pill">Part 4</div><h3 class="part-heading">Create the UI</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create the dashboard interface</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q51-p4-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p4-code">ui <- fluidPage(
+  
+  titlePanel("Car Analytics Dashboard"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      
+      checkboxGroupInput(
+        "cyl",
+        "Select Cylinders:",
+        choices = c(4, 6, 8),
+        selected = c(4, 6, 8)
+      ),
+      
+      sliderInput(
+        "min_mpg",
+        "Minimum MPG:",
+        min = min(mtcars$mpg),
+        max = max(mtcars$mpg),
+        value = min(mtcars$mpg)
+      )
+    ),
+    
+    mainPanel(
+      
+      h3("Key Performance Indicators"),
+      
+      fluidRow(
+        column(4, h4("Number of Cars"), textOutput("car_count")),
+        column(4, h4("Average MPG"), textOutput("average_mpg")),
+        column(4, h4("Average Horsepower"), textOutput("average_hp"))
+      ),
+      
+      h3("Filtered Cars"),
+      DTOutput("car_table"),
+      
+      h3("MPG Distribution"),
+      plotOutput("mpg_plot"),
+      
+      h3("Cylinder-wise Average MPG"),
+      plotOutput("cylinder_plot")
+    )
+  )
+)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q51 Part 5 -->
+        <section id="q51-part-5" class="guide-card part-card" data-part="5">
+          <div class="card-header"><div class="part-pill">Part 5</div><h3 class="part-heading">Create the Server</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Create the dashboard logic</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q51-p5-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p5-code">server <- function(input, output) {
+  
+  
+  filtered_data <- reactive({
+    
+    mtcars[
+      mtcars$cyl %in% input$cyl &
+      mtcars$mpg >= input$min_mpg,
+    ]
+  })
+  
+  
+  output$car_count <- renderText({
+    nrow(filtered_data())
+  })
+  
+  
+  output$average_mpg <- renderText({
+    round(mean(filtered_data()$mpg), 2)
+  })
+  
+  
+  output$average_hp <- renderText({
+    round(mean(filtered_data()$hp), 2)
+  })
+  
+  
+  output$car_table <- renderDT({
+    filtered_data()
+  })
+  
+  
+  output$mpg_plot <- renderPlot({
+    
+    ggplot(
+      filtered_data(),
+      aes(x = mpg)
+    ) +
+      geom_histogram(
+        bins = 8
+      ) +
+      labs(
+        title = "MPG Distribution",
+        x = "MPG",
+        y = "Number of Cars"
+      )
+  })
+  
+  
+  output$cylinder_plot <- renderPlot({
+    
+    cylinder_data <- filtered_data() %>%
+      group_by(cyl) %>%
+      summarise(
+        Average_MPG = mean(mpg)
+      )
+    
+    ggplot(
+      cylinder_data,
+      aes(x = factor(cyl), y = Average_MPG)
+    ) +
+      geom_col() +
+      labs(
+        title = "Average MPG by Cylinder",
+        x = "Cylinders",
+        y = "Average MPG"
+      )
+  })
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Q51 Part 6 -->
+        <section id="q51-part-6" class="guide-card part-card" data-part="6">
+          <div class="card-header"><div class="part-pill">Part 6</div><h3 class="part-heading">Run the Dashboard</h3></div>
+          <div class="caption-bar"><span class="caption-label">Caption:</span> Start the Shiny application</div>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">R Script</span><button class="copy-btn" data-clipboard="q51-p6-code"><span class="copy-text">Copy Code</span></button></div>
+            <pre><code id="q51-p6-code">shinyApp(
+  ui = ui,
+  server = server
+)</code></pre>
+          </div>
+        </section>
+
+        <!-- Q51 Interactive Simulation Widget -->
+        <div class="widget-box" id="q51-simulator">
+          <div class="widget-header"><span class="widget-badge">LIVE DEMO</span><strong>Interactive mtcars Shiny App Simulator (Q51)</strong></div>
+          <div class="shiny-sim-container">
+            <div class="shiny-sim-sidebar">
+              <div class="input-group">
+                <label>Select Cylinders:</label>
+                <div class="sim-checkbox-group">
+                  <label><input type="checkbox" id="simQ51Cyl4" checked value="4"> 4 Cyl</label>
+                  <label><input type="checkbox" id="simQ51Cyl6" checked value="6"> 6 Cyl</label>
+                  <label><input type="checkbox" id="simQ51Cyl8" checked value="8"> 8 Cyl</label>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="simQ51MinMpg">Minimum MPG: <span id="simQ51MinMpgVal" style="color:var(--accent-cyan); font-weight:700;">10.4</span></label>
+                <input type="range" id="simQ51MinMpg" min="10" max="34" step="0.5" value="10.4" class="sim-slider">
+              </div>
+            </div>
+            <div class="shiny-sim-main">
+              <div class="shiny-sim-kpis">
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Number of Cars</span><span class="sim-kpi-val" id="simQ51CarCount">32</span></div>
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Average MPG</span><span class="sim-kpi-val" id="simQ51AvgMpg">20.09</span></div>
+                <div class="sim-kpi-card"><span class="sim-kpi-label">Average HP</span><span class="sim-kpi-val" id="simQ51AvgHp">146.69</span></div>
+              </div>
+              <div class="table-responsive" style="max-height: 140px; overflow-y: auto; margin-top: 8px;">
+                <table class="sim-table" id="simQ51Table">
+                  <thead><tr><th>Car Model</th><th>MPG</th><th>Cyl</th><th>HP</th><th>WT</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ⭐ Main Shiny Pattern Callout Box -->
+        <section id="q51-summary" class="guide-card">
+          <div class="card-header"><h3 class="part-heading">⭐ The Main Shiny Pattern to Remember</h3></div>
+          <p class="part-intro">For both Q50 and Q51, remember this universal 3-part Shiny structure:</p>
+          <div class="code-wrapper">
+            <div class="code-header"><span class="code-lang">Shiny Blueprint</span></div>
+            <pre><code>ui <- fluidPage(
+  # 1. controls in sidebarPanel & outputs in mainPanel
+)
+
+server <- function(input, output) {
+  # 2. reactive calculation:
+  filtered_data <- reactive({
+    # filter data based on input$...
+  })
+  
+  # 3. render outputs using filtered_data():
+  output$something <- renderText({ ... })
+  output$plot <- renderPlot({ ... })
+}
+
+shinyApp(ui, server)</code></pre>
+          </div>
+          <div class="explanation-box">
+            <h4>💡 The Most Important Concept: <code>reactive()</code></h4>
+            <p><strong>Whenever the user changes a filter, the filtered data is recalculated automatically.</strong></p>
+            <p>Then the KPI text, table, and graphs call <code>filtered_data()</code> with parentheses so they re-render immediately.</p>
+          </div>
+
+          <div class="table-responsive" style="margin-top: 14px;">
+            <table class="sim-table">
+              <thead><tr><th>Requirement</th><th>Shiny Code</th><th>Function in App</th></tr></thead>
+              <tbody>
+                <tr><td>Cylinder filter</td><td><code>checkboxGroupInput("cyl", ...)</code></td><td>Selects multiple cylinder types (4, 6, 8)</td></tr>
+                <tr><td>MPG filter</td><td><code>sliderInput("min_mpg", ...)</code></td><td>Dynamic slider for threshold filtering</td></tr>
+                <tr><td>Reactive filtering</td><td><code>reactive({...})</code></td><td>Auto-updates data when checkboxes or slider move</td></tr>
+                <tr><td>Number of cars</td><td><code>nrow(filtered_data())</code></td><td>KPI count of remaining cars</td></tr>
+                <tr><td>Average MPG</td><td><code>mean(filtered_data()$mpg)</code></td><td>Fuel efficiency KPI</td></tr>
+                <tr><td>Average HP</td><td><code>mean(filtered_data()$hp)</code></td><td>Engine power KPI</td></tr>
+                <tr><td>Filtered table</td><td><code>renderDT()</code></td><td>Interactive data table of filtered cars</td></tr>
+                <tr><td>MPG histogram</td><td><code>geom_histogram(bins = 8)</code></td><td>Visual distribution of MPG values</td></tr>
+                <tr><td>Cylinder analysis</td><td><code>group_by(cyl) + geom_col()</code></td><td>Bar chart of efficiency by cylinder count</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Checklist Section Q51 -->
+        <section id="q51-checklist" class="guide-card checklist-card">
+          <div class="checklist-header">
+            <div class="hero-tag">JUPYTERLAB AUDIT</div>
+            <h2>✅ Q51: Car Analytics Checklist</h2>
+            <p>Check off each step as you run it in JupyterLab. State is saved automatically.</p>
+          </div>
+          <div class="checklist-progress-wrap">
+            <div class="checklist-progress-bar"><div class="progress-fill" id="q51ProgressFill"></div></div>
+            <span class="checklist-count" id="q51StatusText">0 of 6 completed</span>
+          </div>
+          <div class="table-responsive">
+            <table class="checklist-table">
+              <thead><tr><th style="width: 45px;">Status</th><th>Notebook Step</th><th>Part</th><th>Key R Code</th></tr></thead>
+              <tbody id="q51ChecklistBody">
+                <tr data-part="1"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-1"></td><td><label for="q51-chk-1"><strong>Install Packages</strong></label></td><td><a href="#q51-part-1">Part 1</a></td><td><code>install.packages("shiny", "DT", "ggplot2")</code></td></tr>
+                <tr data-part="2"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-2"></td><td><label for="q51-chk-2"><strong>Load Packages</strong></label></td><td><a href="#q51-part-2">Part 2</a></td><td><code>library(shiny)</code>, <code>library(DT)</code></td></tr>
+                <tr data-part="3"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-3"></td><td><label for="q51-chk-3"><strong>Load mtcars</strong></label></td><td><a href="#q51-part-3">Part 3</a></td><td><code>data(mtcars)</code></td></tr>
+                <tr data-part="4"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-4"></td><td><label for="q51-chk-4"><strong>Create UI</strong></label></td><td><a href="#q51-part-4">Part 4</a></td><td><code>checkboxGroupInput</code>, <code>sliderInput</code></td></tr>
+                <tr data-part="5"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-5"></td><td><label for="q51-chk-5"><strong>Create Server</strong></label></td><td><a href="#q51-part-5">Part 5</a></td><td><code>filtered_data <- reactive({...})</code></td></tr>
+                <tr data-part="6"><td><input type="checkbox" class="chk-item q51-chk" id="q51-chk-6"></td><td><label for="q51-chk-6"><strong>Run Dashboard</strong></label></td><td><a href="#q51-part-6">Part 6</a></td><td><code>shinyApp(ui = ui, server = server)</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- JupyterLab Bottom Status Bar -->
+  <footer class="jp-status-bar" aria-label="JupyterLab Status Bar">
+    <div class="jp-status-left">
+      <span class="jp-status-item"><span class="jp-kernel-dot"></span> R (r_env) | Idle</span>
+      <span class="jp-status-sep">|</span>
+      <span class="jp-status-item" id="globalGuideTitle">Q49: Twitter Sentiment</span>
+    </div>
+    <div class="jp-status-right">
+      <span class="jp-status-item">Mode: <strong>Command</strong></span>
+      <span class="jp-status-sep">|</span>
+      <span class="jp-status-item" id="jpStatusBarCell">Cell 1/22</span>
+      <span class="jp-status-sep">|</span>
+      <span class="jp-status-item">Ln 1, Col 1</span>
+      <span class="jp-status-sep">|</span>
+      <span class="jp-status-item">UTF-8</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

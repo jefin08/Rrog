@@ -1,0 +1,1907 @@
+/* ==========================================================================
+   JupyterLab Authentic Theme Stylesheet
+   Replicates the exact design, typography, tabs, cells, and layout of JupyterLab
+   ========================================================================== */
+
+:root,
+body.theme-jupyter-light {
+  /* JupyterLab Light Palette (Default - matching user's JupyterLab screenshot) */
+  --jp-layout-color0: #ffffff;
+  --jp-layout-color1: #ffffff;
+  --jp-layout-color2: #f5f5f5;
+  --jp-layout-color3: #e0e0e0;
+  --jp-layout-color4: #bdbdbd;
+
+  --jp-ui-font-color0: #000000;
+  --jp-ui-font-color1: #212121;
+  --jp-ui-font-color2: #616161;
+  --jp-ui-font-color3: #757575;
+
+  --jp-border-color0: #bdbdbd;
+  --jp-border-color1: #e0e0e0;
+  --jp-border-color2: #eeeeee;
+
+  --jp-brand-color0: #2196f3;
+  --jp-brand-color1: #1976d2;
+  --jp-brand-color2: #1565c0;
+  --jp-brand-color-active: #0d47a1;
+
+  --jp-accent-color0: #ff9800;
+  --jp-accent-color1: #f37626; /* Jupyter Orange */
+
+  --jp-cell-prompt-color: #303f9f; /* Jupyter Prompt [n]: Navy Blue */
+  --jp-cell-editor-bg: #ffffff;
+  --jp-cell-editor-border: #cfd8dc;
+  --jp-cell-active-border: #2196f3; /* Jupyter Active Blue Bar */
+
+  /* Syntax Highlighting (JupyterLab CodeMirror theme) */
+  --syntax-keyword: #008000;
+  --syntax-string: #ba2121;
+  --syntax-comment: #408080;
+  --syntax-function: #0000ff;
+  --syntax-number: #080;
+  --syntax-operator: #212121;
+
+  /* Aliases for UI elements */
+  --bg-primary: #edeef0;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f5f5f5;
+  --bg-surface-glass: rgba(255, 255, 255, 0.98);
+  --border-color: #e0e0e0;
+  --border-focus: #1976d2;
+
+  --text-main: #212121;
+  --text-muted: #616161;
+  --text-faint: #757575;
+
+  --accent-blue: #1976d2;
+  --accent-blue-hover: #1565c0;
+  --accent-cyan: #0288d1;
+  --accent-emerald: #2e7d32;
+  --accent-amber: #f57c00;
+  --accent-rose: #d32f2f;
+  --accent-purple: #7b1fa2;
+
+  --code-bg: #ffffff;
+  --code-header-bg: #f8f9fa;
+  --code-text: #212121;
+
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-full: 9999px;
+
+  /* Layout dimensions */
+  --sidebar-width: 250px;
+  --activity-bar-width: 38px;
+  --transition-fast: 0.12s ease;
+  --transition-normal: 0.2s ease;
+}
+
+body.theme-jupyter-dark,
+body.theme-dark {
+  /* JupyterLab Dark Theme (Official JupyterLab Dark) */
+  --jp-layout-color0: #111111;
+  --jp-layout-color1: #212121;
+  --jp-layout-color2: #2b2b2b;
+  --jp-layout-color3: #383838;
+  --jp-layout-color4: #555555;
+
+  --jp-ui-font-color0: #ffffff;
+  --jp-ui-font-color1: #eeeeee;
+  --jp-ui-font-color2: #aaaaaa;
+  --jp-ui-font-color3: #777777;
+
+  --jp-border-color0: #555555;
+  --jp-border-color1: #383838;
+  --jp-border-color2: #2b2b2b;
+
+  --jp-brand-color0: #42a5f5;
+  --jp-brand-color1: #2196f3;
+  --jp-brand-color2: #1e88e5;
+
+  --jp-cell-prompt-color: #7986cb;
+  --jp-cell-editor-bg: #1e1e1e;
+  --jp-cell-editor-border: #383838;
+  --jp-cell-active-border: #2196f3;
+
+  --bg-primary: #181818;
+  --bg-surface: #212121;
+  --bg-surface-elevated: #2b2b2b;
+  --bg-surface-glass: rgba(33, 33, 33, 0.96);
+  --border-color: #383838;
+  --border-focus: #2196f3;
+
+  --text-main: #e0e0e0;
+  --text-muted: #aaaaaa;
+  --text-faint: #777777;
+
+  --accent-blue: #2196f3;
+  --accent-blue-hover: #42a5f5;
+  --accent-cyan: #26c6da;
+  --accent-emerald: #66bb6a;
+  --accent-amber: #ffa726;
+  --accent-rose: #ef5350;
+  --accent-purple: #ab47bc;
+
+  --code-bg: #1e1e1e;
+  --code-header-bg: #282828;
+  --code-text: #e0e0e0;
+
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.45;
+  font-size: 0.82rem;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll Progress Bar */
+.progress-bar-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--jp-brand-color1);
+  width: 0%;
+  z-index: 2000;
+  transition: width 0.1s ease;
+}
+
+/* ==========================================================================
+   1. JupyterLab Top Menu Bar (.jp-menubar)
+   ========================================================================== */
+.jp-menubar {
+  height: 28px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  user-select: none;
+}
+
+.jp-menubar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jp-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+
+.jp-menu-list {
+  display: flex;
+  align-items: center;
+}
+
+.jp-menu-item {
+  padding: 3px 7px;
+  font-size: 0.78rem;
+  color: var(--text-main);
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.jp-menu-item:hover {
+  background: var(--jp-layout-color3);
+}
+
+.jp-menubar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jp-kernel-badge {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-surface-elevated);
+  padding: 2px 7px;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+}
+
+.jp-kernel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2e7d32; /* Idle green */
+  display: inline-block;
+}
+
+/* Theme Toggle in Menubar */
+.theme-toggle {
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+body.theme-jupyter-dark .sun-icon,
+body.theme-dark .sun-icon { display: block; }
+body.theme-jupyter-dark .moon-icon,
+body.theme-dark .moon-icon { display: none; }
+
+body.theme-jupyter-light .sun-icon,
+body.theme-light .sun-icon { display: none; }
+body.theme-jupyter-light .moon-icon,
+body.theme-light .moon-icon { display: block; }
+
+/* Mobile Menu Toggle */
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 3px;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.mobile-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   2. JupyterLab Notebook Tab Bar (.jp-tabstrip-wrapper)
+   ========================================================================== */
+.jp-tabstrip-wrapper {
+  background: #e5e5e5;
+  border-bottom: 1px solid #c8c8c8;
+  padding: 4px 6px 0 6px;
+  position: sticky;
+  top: 28px;
+  z-index: 90;
+  user-select: none;
+}
+
+body.theme-jupyter-dark .jp-tabstrip-wrapper,
+body.theme-dark .jp-tabstrip-wrapper {
+  background: #282828;
+  border-bottom-color: #383838;
+}
+
+.question-switcher {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.question-switcher::-webkit-scrollbar {
+  display: none;
+}
+
+.q-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px 6px;
+  background: #d8d8d8;
+  border: 1px solid #bfbfbf;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  color: #424242;
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+}
+
+body.theme-jupyter-dark .q-tab,
+body.theme-dark .q-tab {
+  background: #333333;
+  border-color: #424242;
+  color: #cccccc;
+}
+
+.q-tab:hover {
+  background: #e2e2e2;
+  color: #212121;
+}
+
+body.theme-jupyter-dark .q-tab:hover,
+body.theme-dark .q-tab:hover {
+  background: #3c3c3c;
+  color: #ffffff;
+}
+
+/* Active Tab: Pure white, blue top border, seamless with notebook */
+.q-tab.active {
+  background: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+  border-top: 3px solid var(--jp-brand-color1) !important;
+  border-left: 1px solid #bfbfbf !important;
+  border-right: 1px solid #bfbfbf !important;
+  border-bottom: 1px solid var(--bg-surface) !important;
+  font-weight: 600;
+  margin-bottom: -1px;
+  box-shadow: none;
+}
+
+body.theme-jupyter-dark .q-tab.active,
+body.theme-dark .q-tab.active {
+  border-left-color: #424242 !important;
+  border-right-color: #424242 !important;
+  border-bottom-color: var(--bg-surface) !important;
+}
+
+.jp-tab-icon {
+  font-size: 0.85rem;
+}
+
+.q-tab-name {
+  font-family: inherit;
+}
+
+.jp-tab-badge {
+  font-size: 0.65rem;
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  color: var(--text-muted);
+}
+
+.q-tab.active .jp-tab-badge {
+  background: rgba(25, 118, 210, 0.12);
+  color: var(--jp-brand-color1);
+  font-weight: 700;
+}
+
+.jp-tab-close {
+  font-size: 0.7rem;
+  color: #888888;
+  margin-left: 4px;
+  padding: 1px 3px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.jp-tab-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #212121;
+}
+
+.jp-new-tab-btn {
+  padding: 4px 8px;
+  color: #757575;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.jp-new-tab-btn:hover {
+  color: #212121;
+}
+
+/* ==========================================================================
+   3. JupyterLab Notebook Toolbar (.jp-toolbar)
+   ========================================================================== */
+.jp-toolbar {
+  height: 36px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: sticky;
+  top: 61px;
+  z-index: 85;
+  gap: 8px;
+  user-select: none;
+}
+
+.jp-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.jp-tool-btn {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.jp-tool-btn:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.jp-run-cell-btn:hover {
+  color: #2e7d32;
+}
+
+.jp-tool-sep {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  background: var(--border-color);
+  margin: 0 4px;
+}
+
+.jp-cell-type-dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  font-size: 0.74rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.jp-cell-type-dropdown:hover {
+  border-color: #b0bec5;
+}
+
+.jp-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Search Box styled like JupyterLab Filter */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 180px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 8px;
+  color: var(--text-faint);
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 4px 24px 4px 26px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  color: var(--text-main);
+  font-size: 0.76rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.search-box input:focus {
+  border-color: var(--jp-brand-color1);
+}
+
+.search-shortcut {
+  position: absolute;
+  right: 6px;
+  font-size: 0.65rem;
+  color: var(--text-faint);
+}
+
+/* Action Buttons styled in JupyterLab flat style */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  font-family: inherit;
+  user-select: none;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--jp-brand-color1);
+  border-color: var(--jp-brand-color1);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: var(--jp-brand-color2);
+  border-color: var(--jp-brand-color2);
+}
+
+.btn-outline {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: var(--bg-surface-elevated);
+  border-color: #b0bec5;
+}
+
+.btn.copied, .copy-btn.copied {
+  background: #2e7d32 !important;
+  border-color: #2e7d32 !important;
+  color: #ffffff !important;
+}
+
+.jp-kernel-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-left: 1px solid var(--border-color);
+}
+
+.jp-kernel-circle {
+  color: #2e7d32;
+  font-weight: 800;
+}
+
+.jp-kernel-text {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   4. Layout Wrapper (Activity Bar + File Browser + Main Canvas)
+   ========================================================================== */
+.layout-wrapper {
+  max-width: 100%;
+  margin: 0;
+  display: flex;
+  min-height: calc(100vh - 97px);
+  background: var(--bg-primary);
+  padding-bottom: 28px;
+}
+
+/* Left Activity Bar (38px width) */
+.jp-activity-bar {
+  width: var(--activity-bar-width);
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 6px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 97px;
+  height: calc(100vh - 125px);
+  z-index: 30;
+}
+
+.jp-act-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.jp-act-btn:hover {
+  background: var(--bg-surface-elevated);
+  color: var(--text-main);
+}
+
+.jp-act-btn.active {
+  color: var(--jp-brand-color1);
+  background: rgba(33, 150, 243, 0.08);
+  box-shadow: inset 2px 0 0 var(--jp-brand-color1);
+}
+
+.jp-act-bottom {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* JupyterLab File Browser Sidebar */
+.guide-sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  height: calc(100vh - 125px);
+  position: sticky;
+  top: 97px;
+  flex-shrink: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.guide-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.guide-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 2px;
+}
+
+.jp-fb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface-elevated);
+}
+
+.jp-fb-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 2px 6px;
+  font-size: 0.72rem;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.jp-fb-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.jp-fb-new {
+  background: var(--jp-brand-color1) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+
+.jp-fb-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jp-fb-breadcrumb strong {
+  color: var(--text-main);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 4px;
+}
+
+.toc-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.progress-pill {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  background: transparent;
+  padding: 0;
+}
+
+.sidebar-nav {
+  padding: 2px 4px 20px;
+}
+
+.nav-group {
+  margin-bottom: 10px;
+}
+
+.nav-group-title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  padding: 4px 6px 2px;
+  letter-spacing: 0.04em;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  font-size: 0.78rem;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-link::before {
+  content: "📘";
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.nav-link span {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.nav-link:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Selected row in JupyterLab file tree (exact match to Untitled3.ipynb in screenshot!) */
+.nav-link.active {
+  background: var(--jp-brand-color1) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.nav-link.active span {
+  color: #ffffff !important;
+  opacity: 0.9;
+}
+
+.nav-link.active::before {
+  filter: brightness(1.3);
+}
+
+/* ==========================================================================
+   5. JupyterLab Main Canvas & Notebook Cells
+   ========================================================================== */
+.guide-main {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.question-view {
+  display: none;
+}
+
+.question-view.active {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* General Card */
+.guide-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  box-shadow: var(--card-shadow);
+}
+
+/* Hero / Overview Card styled like Markdown Header Cell */
+.hero-card {
+  background: var(--bg-surface);
+  border-left: 3px solid var(--jp-brand-color1);
+  padding: 18px 22px;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--jp-brand-color1);
+  background: rgba(25, 118, 210, 0.08);
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin-bottom: 6px;
+}
+
+.hero-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.hero-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 850px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.hero-desc strong {
+  color: var(--jp-brand-color1);
+}
+
+.dataset-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.meta-box {
+  background: var(--bg-surface-elevated);
+  padding: 6px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.meta-val {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.interactive-sandbox-bar {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-left: 3px solid #ff9800;
+  border-radius: 2px;
+  padding: 8px 12px;
+}
+
+.sandbox-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #e65100;
+  margin-bottom: 2px;
+}
+
+.interactive-sandbox-bar p {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.overview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   JupyterLab Notebook Cell (.part-card)
+   ========================================================================== */
+.part-card {
+  position: relative;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px 14px 54px; /* Gutter for prompt [n]: */
+  box-shadow: var(--card-shadow);
+  transition: all var(--transition-fast);
+}
+
+/* The signature JupyterLab Cell Prompt [1]: in navy blue */
+.part-card::before {
+  content: "[" attr(data-part) "]:";
+  position: absolute;
+  left: 6px;
+  top: 36px;
+  width: 40px;
+  text-align: right;
+  font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--jp-cell-prompt-color); /* #303f9f navy blue */
+  letter-spacing: -0.01em;
+}
+
+.part-card:hover, .part-card:focus-within {
+  border-color: #b0bec5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Active Cell Indicator: Signature 5px blue bar on left */
+.part-card:hover .code-wrapper,
+.part-card:focus-within .code-wrapper {
+  border-left-color: var(--jp-cell-active-border);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.part-pill {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--jp-brand-color1);
+  color: #ffffff;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.part-heading {
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+}
+
+.caption-bar {
+  background: var(--bg-surface-elevated);
+  border-left: 2px solid var(--jp-brand-color1);
+  padding: 4px 8px;
+  border-radius: 0 2px 2px 0;
+  font-size: 0.78rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.caption-label {
+  font-weight: 700;
+  color: var(--jp-brand-color1);
+  margin-right: 4px;
+}
+
+.part-intro {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  line-height: 1.45;
+}
+
+/* JupyterLab Code Cell Input Editor */
+.code-wrapper {
+  background: var(--code-bg);
+  border: 1px solid var(--jp-cell-editor-border);
+  border-left: 5px solid transparent;
+  border-radius: 0;
+  margin-bottom: 10px;
+  box-shadow: none;
+  transition: border-left-color 0.15s ease;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--code-header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.code-lang {
+  font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--jp-brand-color1);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 2px;
+  padding: 2px 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copy-btn:hover {
+  background: var(--jp-brand-color1);
+  color: #ffffff;
+  border-color: var(--jp-brand-color1);
+}
+
+.copy-btn.copied {
+  background: #2e7d32 !important;
+  color: #ffffff !important;
+  border-color: #2e7d32 !important;
+}
+
+pre {
+  margin: 0;
+  padding: 10px 14px;
+  overflow-x: auto;
+  background: var(--code-bg);
+}
+
+/* Code Typography & JupyterLab CodeMirror Syntax */
+code {
+  font-family: 'Cascadia Code', 'Fira Code', Consolas, 'Source Code Pro', Monaco, monospace;
+  font-size: 0.85rem;
+  color: var(--code-text);
+  line-height: 1.55;
+}
+
+p code, li code, td code {
+  background: var(--bg-surface-elevated);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 0.76rem;
+  color: var(--jp-brand-color1);
+  border: 1px solid var(--border-color);
+  font-family: 'Cascadia Code', Consolas, monospace;
+}
+
+/* Explanation Box (Compact) */
+.explanation-box {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.explanation-box h4 {
+  font-size: 0.825rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.explanation-box p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.clean-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.clean-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.clean-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--accent-blue);
+  font-weight: bold;
+}
+
+.step-list {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Stat Grid (Compact) */
+.data-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+}
+
+.stat-desc {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+/* Output Preview Box (Compact) */
+.output-preview {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-top: 10px;
+}
+
+.preview-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-faint);
+  margin-bottom: 8px;
+}
+
+/* Tables (Compact) */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.sim-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.sim-table th, .sim-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sim-table th {
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Badges / Tags */
+.tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.tag-neutral { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+.tag-positive { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.tag-negative { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+/* Interactive Widgets (Compact) */
+.widget-box {
+  background: linear-gradient(180deg, var(--bg-surface-elevated), var(--bg-surface));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+}
+
+.widget-badge {
+  background: var(--accent-blue);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.interactive-cleaner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-blue);
+}
+
+.cleaner-output-arrow {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.output-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.output-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+.cleaner-result {
+  flex: 1;
+  background: var(--bg-primary);
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.8rem;
+  color: var(--accent-emerald);
+  border: 1px solid var(--border-color);
+  min-height: 34px;
+  word-break: break-all;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.token-chip {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #c4b5fd;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-family: 'Fira Code', monospace;
+}
+
+/* ==========================================================================
+   Shiny Interactive Simulator (Q50 & Q51)
+   ========================================================================== */
+.shiny-sim-container {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.shiny-sim-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-right: 1px solid var(--border-color);
+  padding-right: 10px;
+}
+
+.sim-select {
+  width: 100%;
+  padding: 4px 8px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-size: 0.76rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.sim-slider {
+  width: 100%;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+}
+
+.sim-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.sim-checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.shiny-sim-main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shiny-sim-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sim-kpi-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.sim-kpi-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.sim-kpi-val {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent-emerald);
+  font-family: 'Fira Code', monospace;
+}
+
+/* Word Cloud Simulation (Compact) */
+.sim-cloud-wrapper {
+  min-height: 160px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+}
+
+.cloud-item {
+  font-weight: 700;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.cloud-item:hover {
+  transform: scale(1.15);
+}
+
+/* Chart SVGs */
+.chart-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 4px;
+}
+
+.chart-svg {
+  width: 100%;
+  min-width: 420px;
+  display: block;
+}
+
+.chart-bar-rect {
+  transition: opacity 0.2s ease;
+}
+
+.chart-bar-rect:hover {
+  opacity: 0.85;
+}
+
+.chart-axis-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  fill: var(--text-muted);
+}
+
+.chart-val-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 9.5px;
+  fill: var(--text-main);
+  font-weight: 600;
+}
+
+/* Time Series Specific SVG Styles */
+.ts-path {
+  fill: none;
+  stroke: #38bdf8;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.ts-trend-path {
+  fill: none;
+  stroke: #f59e0b;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.ts-forecast-path {
+  fill: none;
+  stroke: #10b981;
+  stroke-width: 2.2;
+}
+
+.ts-ci-80 {
+  fill: rgba(16, 185, 129, 0.28);
+}
+
+.ts-ci-95 {
+  fill: rgba(16, 185, 129, 0.12);
+}
+
+.ts-grid {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-dasharray: 2 3;
+}
+
+body.theme-light .ts-grid {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+/* Chips Flow */
+.chips-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.term-pill {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 4px 9px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-cyan);
+}
+
+/* Exam Quote Box (Compact) */
+.exam-quote-box {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(16, 185, 129, 0.06));
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 12px 0;
+}
+
+.quote-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.exam-quote-box blockquote {
+  font-style: italic;
+  font-size: 0.84rem;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Checklist Section (Compact) */
+.checklist-card {
+  background: linear-gradient(180deg, var(--bg-surface), rgba(16, 185, 129, 0.02));
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.checklist-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+
+.checklist-header p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 14px;
+}
+
+.checklist-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.checklist-progress-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-emerald));
+  width: 0%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.checklist-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent-emerald);
+  white-space: nowrap;
+}
+
+.checklist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.checklist-table th, .checklist-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+
+.checklist-table th {
+  background: var(--bg-surface-elevated);
+  font-weight: 700;
+  color: var(--text-main);
+  text-align: left;
+}
+
+.checklist-table tr.completed-row {
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.checklist-table tr.completed-row label {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+.checklist-table input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--accent-emerald);
+  cursor: pointer;
+}
+
+.checklist-table a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.checklist-table a:hover {
+  text-decoration: underline;
+}
+
+/* Footer (Compact) */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-faint);
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   JupyterLab Active Cell State & Indicator
+   ========================================================================== */
+.part-card.active-cell {
+  border-color: #b0bec5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.part-card.active-cell .code-wrapper {
+  border-left-color: var(--jp-cell-active-border);
+}
+
+/* ==========================================================================
+   JupyterLab DataFrame / Table Output (.jp-dataframe)
+   ========================================================================== */
+.jp-dataframe {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.jp-df-meta {
+  font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.jp-dataframe-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.jp-dataframe-table th,
+.jp-dataframe-table td {
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.jp-dataframe-table th {
+  font-weight: 700;
+  color: var(--text-main);
+  background: var(--bg-surface-elevated);
+}
+
+.jp-dataframe-table th .col-type {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: normal;
+  color: var(--text-faint);
+}
+
+.jp-dataframe-table td.row-num {
+  font-weight: 700;
+  color: var(--text-faint);
+  width: 25px;
+  text-align: right;
+  border-right: 1px solid var(--border-color);
+  padding-right: 8px;
+}
+
+.jp-dataframe-table tr:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+body.theme-jupyter-dark .jp-dataframe-table tr:hover,
+body.theme-dark .jp-dataframe-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ==========================================================================
+   JupyterLab Bottom Status Bar (.jp-status-bar)
+   ========================================================================== */
+.jp-status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: #e0e0e0;
+  border-top: 1px solid #c5c5c5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 0.72rem;
+  color: #555555;
+  z-index: 1000;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body.theme-jupyter-dark .jp-status-bar,
+body.theme-dark .jp-status-bar {
+  background: #242424;
+  border-top-color: #383838;
+  color: #aaaaaa;
+}
+
+.jp-status-left,
+.jp-status-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.jp-status-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jp-status-item strong {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.jp-status-sep {
+  color: #a0a0a0;
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+body.theme-jupyter-dark .jp-status-sep,
+body.theme-dark .jp-status-sep {
+  color: #555555;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .layout-wrapper {
+    flex-direction: column;
+    padding: 0 0 30px 0;
+  }
+
+  .jp-activity-bar {
+    display: none;
+  }
+
+  .guide-sidebar {
+    display: none;
+    position: fixed;
+    top: 97px;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 121px);
+    z-index: 999;
+    border-radius: 0;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .guide-sidebar.mobile-open {
+    display: block;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  .search-box {
+    width: 150px;
+  }
+}
+
+@media (max-width: 860px) {
+  .header-container {
+    height: auto;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .question-switcher {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .search-box {
+    display: none;
+  }
+
+  .btn-outline span {
+    display: none;
+  }
+
+  .guide-card {
+    padding: 14px 12px;
+  }
+
+  .hero-header h2 {
+    font-size: 1.15rem;
+  }
+}
